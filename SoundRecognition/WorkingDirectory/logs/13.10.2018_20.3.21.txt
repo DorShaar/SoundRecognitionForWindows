@@ -1,0 +1,31 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Error!
+No such directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\Fingerprints\SpecificSoundRequired\tests
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: BoilingTest
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords
+Start recording failed
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SoundRecognition.IntervalsRecorderStrategy.StartListeningToMicrophone(Int32 audioDeviceNumber) in C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\Recorder\IntervalsRecorderStrategy.cs:line 25
+   at SoundRecognition.Recorder.Record() in C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\Recorder\Recorder.cs:line 25

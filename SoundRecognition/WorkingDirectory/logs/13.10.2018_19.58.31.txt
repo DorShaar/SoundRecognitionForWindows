@@ -1,0 +1,34 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+shortTest.png
+test.png
+veryshort.png
+
+Type the name of the product to register
+Type number of maximal saftey hitting time in seconds 
+Generating string to encode: cc0c6af4-0701-4ea8-804b-b39a87f54bca
+BoilingTest added to database
+Write which recognition type should handle BoilingTest
+Type 1 for SpecificSoundRequired
+Type 2 for Popcorn
+Categories: tests, 
+Write which Category BoilingTest suits or write new category
+Error!
+No such directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\Fingerprints\SpecificSoundRequired\tests
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: BoilingTest
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords

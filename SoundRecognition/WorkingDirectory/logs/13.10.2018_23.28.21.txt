@@ -1,0 +1,35 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: veryshort
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 2900
+Pop detected after: 3370
+Pop detected after: 4742
+Pop detected after: 6133
+Pop detected after: 6353
+Pop detected after: 8195
+Record data saved
+Stopped recording

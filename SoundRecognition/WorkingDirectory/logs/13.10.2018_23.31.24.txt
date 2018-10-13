@@ -1,0 +1,141 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: veryshort
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 3806
+Pop detected after: 4042
+Pop detected after: 4273
+Pop detected after: 4493
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped
+Machine should stop since reached maximal working time allowed 10000
+Machine stopped
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Invalid input
+Scan result: No recognized item available
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+mItemInfo is unknown, machine will not start
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: veryshort
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 2622
+Pop detected after: 3089
+Pop detected after: 6308
+Pop detected after: 6543
+Pop detected after: 6997
+Pop detected after: 7232
+Pop detected after: 7686
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped
+Machine should stop since reached maximal working time allowed 10000
+Machine stopped
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: veryshort
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 2629
+Pop detected after: 4002
+Pop detected after: 5848
+Pop detected after: 6769
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped
+Machine should stop since reached maximal working time allowed 10000
+Machine stopped
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Recognizer machine turned off

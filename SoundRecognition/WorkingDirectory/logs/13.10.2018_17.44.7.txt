@@ -1,0 +1,24 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+shortTest.png
+test.png
+Invalid input
+Scan result: No recognized item available
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+mMicrowaveItemInfo is unknown, machine will not start
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Recognizer machine turned off

@@ -1,0 +1,59 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+mMicrowaveItemInfo is unknown, machine will not start
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+test.png
+Invalid input
+Scan result: No recognized item available
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+test.png
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Pop detected after: 6621
+Pop detected after: 9374
+Pop detected after: 10762
+Pop detected after: 13512
+Pop detected after: 15872
+Pop detected after: 23467
+Pop detected after: 25746
+Pop detected after: 29889
+Pop detected after: 30811
+Pop detected after: 32654
+Pop detected after: 32872
+Pop detected after: 33105
+Pop detected after: 34949
+Pop detected after: 35184
+Pop detected after: 38402
+Pop detected after: 40467
+Pop detected after: 40934
+Pop detected after: 41388
+Pop detected after: 41840
+Pop detected after: 43451
+Pop detected after: 50122
+Pop detected after: 55686
+Pop detected after: 57762

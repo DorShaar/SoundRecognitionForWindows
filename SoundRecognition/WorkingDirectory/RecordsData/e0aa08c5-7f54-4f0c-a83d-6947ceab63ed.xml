@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RecordInfoDescriptor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IntervalsList>
+    <double>0.46700000000000008</double>
+    <double>3.219</double>
+    <double>0.23500000000000032</double>
+    <double>0.45399999999999974</double>
+    <double>0.23500000000000032</double>
+    <double>0.45399999999999974</double>
+  </IntervalsList>
+  <RecognitionsTimesList>
+    <double>2.622</double>
+    <double>3.089</double>
+    <double>6.308</double>
+    <double>6.543</double>
+    <double>6.997</double>
+    <double>7.232</double>
+    <double>7.686</double>
+  </RecognitionsTimesList>
+  <AvgInterval>0.844</AvgInterval>
+  <MinInterval>0.23500000000000032</MinInterval>
+  <MaxInterval>3.219</MaxInterval>
+  <Duration>8.013</Duration>
+</RecordInfoDescriptor>

@@ -1,0 +1,51 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+shortTest.png
+test.png
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Pop detected after: 2758
+Pop detected after: 2805
+Pop detected after: 4509
+Pop detected after: 6383
+Pop detected after: 8273
+Pop detected after: 9697
+Pop detected after: 12273
+Pop detected after: 12322
+Pop detected after: 13478
+Pop detected after: 15305
+Pop detected after: 16413
+Pop detected after: 17697
+Pop detected after: 17743
+Pop detected after: 17806
+Pop detected after: 19447
+Pop detected after: 20197
+Pop detected after: 20227
+Pop detected after: 20463
+Pop detected after: 21150
+Pop detected after: 21335
+Pop detected after: 21385
+Pop detected after: 21429
+Pop detected after: 22632
+Pop detected after: 22898
+Pop detected after: 23494
+Pop detected after: 23588
+Pop detected after: 24414
+Recognizer was signaled to stop
+Recognizer machine should stop since reached maximal working time allowed 25000
+Recognizer machine should stop since reached maximal working time allowed 25000
+Recognizer was signaled to stop

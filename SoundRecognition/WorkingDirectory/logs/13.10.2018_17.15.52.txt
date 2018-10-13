@@ -1,0 +1,216 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+test.png
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Pop detected after: 4956
+Pop detected after: 8176
+Pop detected after: 8596
+Pop detected after: 8642
+Pop detected after: 8956
+Pop detected after: 9004
+Pop detected after: 9330
+Pop detected after: 9706
+Pop detected after: 9831
+Pop detected after: 10018
+Pop detected after: 10065
+Pop detected after: 10284
+Pop detected after: 10565
+Pop detected after: 10846
+Pop detected after: 10892
+Pop detected after: 11064
+Pop detected after: 11347
+Pop detected after: 11627
+Pop detected after: 12128
+Pop detected after: 12363
+Pop detected after: 12644
+Pop detected after: 12908
+Pop detected after: 13285
+Pop detected after: 13331
+Pop detected after: 13644
+Pop detected after: 13706
+Pop detected after: 14018
+Pop detected after: 14629
+Pop detected after: 14942
+Pop detected after: 15253
+Pop detected after: 15441
+Pop detected after: 15767
+Pop detected after: 15815
+Pop detected after: 16222
+Pop detected after: 16596
+Pop detected after: 16644
+Pop detected after: 17003
+Pop detected after: 18112
+Pop detected after: 18486
+Pop detected after: 20316
+Pop detected after: 21019
+Pop detected after: 21517
+Pop detected after: 21707
+Pop detected after: 21737
+Pop detected after: 22253
+Pop detected after: 22392
+Pop detected after: 22846
+Pop detected after: 23488
+Pop detected after: 24128
+Pop detected after: 27721
+Pop detected after: 28035
+Pop detected after: 28691
+Pop detected after: 29095
+Pop detected after: 29378
+Pop detected after: 30487
+Pop detected after: 31034
+Pop detected after: 31581
+Pop detected after: 32145
+Pop detected after: 32690
+Pop detected after: 33238
+Pop detected after: 34439
+Pop detected after: 35487
+Pop detected after: 36050
+Pop detected after: 36096
+Pop detected after: 37784
+Pop detected after: 38300
+Pop detected after: 39533
+Pop detected after: 41847
+Pop detected after: 41893
+Pop detected after: 42347
+Pop detected after: 42393
+Pop detected after: 42440
+Pop detected after: 42675
+Pop detected after: 43955
+Pop detected after: 44551
+Pop detected after: 45207
+Pop detected after: 45285
+Pop detected after: 45331
+Pop detected after: 45377
+Pop detected after: 45425
+Pop detected after: 50301
+Pop detected after: 50345
+Pop detected after: 50580
+Pop detected after: 50626
+Pop detected after: 50675
+Pop detected after: 50753
+Pop detected after: 50814
+Pop detected after: 52142
+Pop detected after: 52504
+Pop detected after: 52830
+Pop detected after: 53144
+Pop detected after: 53753
+Pop detected after: 54847
+Pop detected after: 55221
+Pop detected after: 55596
+Pop detected after: 56002
+Pop detected after: 56236
+Pop detected after: 57251
+Pop detected after: 58348
+Pop detected after: 58674
+Pop detected after: 58987
+Pop detected after: 59533
+Pop detected after: 60284
+Pop detected after: 61283
+Pop detected after: 61801
+Pop detected after: 62127
+Pop detected after: 62175
+Pop detected after: 62534
+Pop detected after: 62815
+Pop detected after: 62863
+Pop detected after: 63455
+Pop detected after: 63595
+Pop detected after: 64143
+Pop detected after: 64456
+Pop detected after: 64643
+Pop detected after: 64971
+Pop detected after: 66033
+Pop detected after: 66393
+Pop detected after: 66442
+Pop detected after: 66487
+Pop detected after: 66581
+Pop detected after: 66627
+Pop detected after: 66676
+Pop detected after: 66721
+Pop detected after: 66768
+Pop detected after: 66815
+Pop detected after: 66861
+Pop detected after: 66910
+Pop detected after: 67128
+Pop detected after: 67270
+Pop detected after: 67596
+Pop detected after: 68659
+Pop detected after: 69019
+Pop detected after: 69345
+Pop detected after: 69660
+Pop detected after: 70127
+Pop detected after: 72876
+Pop detected after: 73941
+Pop detected after: 74488
+Pop detected after: 74861
+Pop detected after: 75548
+Pop detected after: 77254
+Pop detected after: 77894
+Pop detected after: 78535
+Pop detected after: 79268
+Pop detected after: 82908
+Pop detected after: 82955
+Pop detected after: 83002
+Pop detected after: 88377
+Pop detected after: 88425
+Pop detected after: 88470
+Pop detected after: 88878
+Pop detected after: 88926
+Pop detected after: 95284
+Pop detected after: 95314
+Pop detected after: 95377
+Pop detected after: 95926
+Pop detected after: 96160
+Pop detected after: 96204
+Pop detected after: 96238
+Pop detected after: 96285
+Pop detected after: 96330
+Pop detected after: 98768
+Pop detected after: 98955
+Pop detected after: 99002
+Pop detected after: 99051
+Pop detected after: 99095
+Pop detected after: 99145
+Pop detected after: 99174
+Pop detected after: 99237
+Pop detected after: 101158
+Pop detected after: 102080
+Pop detected after: 103097
+Pop detected after: 105113
+Pop detected after: 106050
+Pop detected after: 107877
+Pop detected after: 108847
+Pop detected after: 109767
+Pop detected after: 110674
+Pop detected after: 111596
+Pop detected after: 112472
+Pop detected after: 113347
+Pop detected after: 114267
+Pop detected after: 115284
+Pop detected after: 116253
+Pop detected after: 117206
+Pop detected after: 118128
+Pop detected after: 119049
+Pop detected after: 119971
+Recognizer machine should stop since reached maximal working time allowed 120000
+Recognizer machine should stop since reached maximal working time allowed 120000
+Recognizer machine stopped
+Choose an option:
+1. Scan Item
+2. Start Microwave
+3. Turn-Off
+Stopped recording

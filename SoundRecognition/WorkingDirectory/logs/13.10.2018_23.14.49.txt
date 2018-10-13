@@ -1,0 +1,124 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Stored 56 hashed fingerprints from AlreadyHotWaterBoiling1.wav
+Stored 56 hashed fingerprints from AlreadyHotWaterBoiling2.wav
+Stored 56 hashed fingerprints from waterboiling1_part1.wav
+Stored 56 hashed fingerprints from waterboiling1_part2.wav
+Stored 56 hashed fingerprints from waterboiling2_part1.wav
+Stored 56 hashed fingerprints from waterboiling2_part2.wav
+Stored 56 hashed fingerprints from waterboiling2_part3.wav.wav
+Stored 56 hashed fingerprints from waterboiling2_part4.wav
+Stored 56 hashed fingerprints from waterboiling2_part5.wav.wav
+Stored 56 hashed fingerprints from waterboiling3_part1.wav
+Stored 56 hashed fingerprints from waterboiling3_part2.wav
+Stored 56 hashed fingerprints from waterboiling3_part3.wav
+Stored 56 hashed fingerprints from waterboiling4_part1.wav
+Stored 56 hashed fingerprints from waterboiling4_part2.wav
+Stored 56 hashed fingerprints from waterboiling5_part1.wav
+Stored 56 hashed fingerprints from waterboiling5_part2.wav
+Stored 56 hashed fingerprints from waterboiling5_part3.wav
+Stored 56 hashed fingerprints from waterboiling5_part4.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part1.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part2.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part3.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part4.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part5.wav
+Stored 56 hashed fingerprints from WaterBoilingSecond_part1.wav
+Stored 56 hashed fingerprints from WaterBoilingSecond_part2.wav
+Stored 56 hashed fingerprints from WaterBoilingSecond_part3.wav
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: BoilingTest
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords
+New sub record detected: sub_record_0.wav
+Recording...
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+A new file has been changed - sub_record_0.wav. Should have delete that file before!
+New sub record detected: sub_record_1.wav
+Quering sub_record_0.wav with amplification 10, analyzing 10 seconds
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav is locked. Waiting for 1000 ms
+Quering sub_record_1.wav with amplification 10, analyzing 10 seconds
+A new file has been changed - sub_record_1.wav. Should have delete that file before!
+New sub record detected: sub_record_2.wav
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+Algorithm should stop since identified suitable sound
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav is locked. Waiting for 1000 ms
+Stopped recording
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_1.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_2.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_3.wav
+Going to delete C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_3.wav
+Machine stopped
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+BoilingTest.png
+shortTest.png
+test.png
+veryshort.png
+
+Type name of QR-Barcode image to scan
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: veryshort
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 2696
+Pop detected after: 3607
+Pop detected after: 5447
+Pop detected after: 5694
+Stopped recording

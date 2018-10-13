@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RecordInfoDescriptor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IntervalsList>
+    <double>2.751</double>
+    <double>0.23599999999999977</double>
+    <double>0.92000000000000082</double>
+    <double>2.0619999999999994</double>
+    <double>3</double>
+    <double>0.21899999999999942</double>
+    <double>0.23600000000000065</double>
+    <double>0.23300000000000054</double>
+    <double>0.23599999999999888</double>
+    <double>0.21799999999999997</double>
+    <double>2.7650000000000006</double>
+    <double>0.23400000000000176</double>
+    <double>0.907</double>
+    <double>2.5299999999999976</double>
+    <double>3.7340000000000018</double>
+    <double>0.50099999999999767</double>
+    <double>0.23400000000000176</double>
+  </IntervalsList>
+  <RecognitionsTimesList>
+    <double>3.682</double>
+    <double>6.433</double>
+    <double>6.669</double>
+    <double>7.589</double>
+    <double>9.651</double>
+    <double>12.651</double>
+    <double>12.87</double>
+    <double>13.106</double>
+    <double>13.339</double>
+    <double>13.575</double>
+    <double>13.793</double>
+    <double>16.558</double>
+    <double>16.792</double>
+    <double>17.699</double>
+    <double>20.229</double>
+    <double>23.963</double>
+    <double>24.464</double>
+    <double>24.698</double>
+  </RecognitionsTimesList>
+  <AvgInterval>1.2362352941176469</AvgInterval>
+  <MinInterval>0.21799999999999997</MinInterval>
+  <MaxInterval>3.7340000000000018</MaxInterval>
+  <Duration>32.867</Duration>
+</RecordInfoDescriptor>

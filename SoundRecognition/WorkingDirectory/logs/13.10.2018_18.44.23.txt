@@ -1,0 +1,51 @@
+Recognizer machine turned on
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Choose an option:
+1. Create New Barcode.
+2. Scan Existing Barcode
+
+Barcodes available:
+shortTest.png
+test.png
+Type the name of the product to register
+Type number of maximal saftey hitting time in seconds 
+Generating string to encode: a10d09c7-0f35-47e3-bbc3-00243d7aa33a
+veryshort added to database
+Write which recognition type should handle veryshort
+Type 1 for SpecificSoundRequired
+Type 2 for Popcorn
+Categories: tests, 
+Write which Category veryshort suits or write new category
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: veryshort
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Error!
+Recording...
+Pop detected after: 3351
+Pop detected after: 3617
+Pop detected after: 3852
+Pop detected after: 4538
+Pop detected after: 5694
+Pop detected after: 6382
+Pop detected after: 8678
+Pop detected after: 8914
+Recognizer was signaled to stop
+Recognizer machine should stop since reached maximal working time allowed 10000
+Recognizer machine should stop since reached maximal working time allowed 10000
+Recognizer machine stopped
+Stopped recording
+Choose an option:
+1. Scan Item
+2. Start
+3. Turn-Off
+Current Item: No item in the machine
+Recognizer machine turned off
