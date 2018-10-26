@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RecordInfoDescriptor xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <IntervalsList />
-  <RecognitionsTimesList />
-  <AvgInterval>0</AvgInterval>
-  <MinInterval>0</MinInterval>
-  <MaxInterval>0</MaxInterval>
-  <Duration>9.273</Duration>
-</RecordInfoDescriptor>

@@ -58,9 +58,5 @@ namespace SoundRecognition
                     mWaveFileWriter = new WaveFileWriter(mCurrentWavFilePath, mWaveIn.WaveFormat);
                }
           }
-
-          public void DoOperationWhileRecording()
-          {
-          }
      }
 }

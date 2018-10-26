@@ -7,6 +7,5 @@ namespace SoundRecognition
           string RecordsDirectory { get; set; }
 
           void StartListeningToMicrophone(int audioDeviceNumber = 0);
-          void DoOperationWhileRecording();
      }
 }

@@ -1,0 +1,14 @@
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Error!
+No such directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\Fingerprints\SpecificSoundRequired\POPCORN
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords
+New sub record detected: sub_record_0.wav
+Recording...
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms
+C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords\sub_record_0.wav is locked. Waiting for 1000 ms

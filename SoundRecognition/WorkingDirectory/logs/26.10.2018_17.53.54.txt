@@ -1,0 +1,16 @@
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 6148
+Pop detected after: 9600
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped
+Machine should stop since reached maximal working time allowed 10000
+Machine stopped

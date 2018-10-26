@@ -10,6 +10,8 @@ namespace SoundRecognition
 {
      internal static class SerializationMachine
      {
+          private static Logger mLogger = new Logger(nameof(SerializationMachine), ConsoleColor.Cyan);
+
           public static T DeepClone<T>(this T i_ToClone) where T : class
           {
                using (Stream stream = new MemoryStream())
@@ -45,7 +47,7 @@ namespace SoundRecognition
                     }
                     catch (Exception e)
                     {
-                         Console.WriteLine($"Some error occured using ProtoSerialize: {e.Message}");
+                         mLogger.WriteLine($"Some error occured using ProtoSerialize: {e.Message}");
                     }
                }
           }
@@ -68,7 +70,7 @@ namespace SoundRecognition
                }
                catch (Exception e)
                {
-                    Console.WriteLine($"Some error occured using ProtoDeserialize: {e.Message}");
+                    mLogger.WriteLine($"Some error occured using ProtoDeserialize: {e.Message}");
                }
 
                return objectToReturn;
@@ -107,7 +109,7 @@ namespace SoundRecognition
                     Serialize(keyPairValue.Value, dataBasePath);
                }
 
-               Console.WriteLine($"Database saved to {dataBasePath}");
+               mLogger.WriteLine($"Database saved to {dataBasePath}");
           }
 
           public static Dictionary<T, K> LoadDictionaryFromDB<T, K>(string databasePath)
@@ -128,11 +130,11 @@ namespace SoundRecognition
                          }
                     }
 
-                    Console.WriteLine($"Database loaded from {databasePath}");
+                    mLogger.WriteLine($"Database loaded from {databasePath}");
                }
                catch (Exception e)
                {
-                    Console.WriteLine($"Database was not loaded due to {e.Message}");
+                    mLogger.WriteLine($"Database was not loaded due to {e.Message}");
                }
 
                return dictionaryFromDB;

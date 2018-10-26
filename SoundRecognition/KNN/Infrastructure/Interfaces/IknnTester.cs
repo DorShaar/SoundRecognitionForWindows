@@ -1,10 +1,8 @@
 ﻿
-namespace SoundRecognition
+namespace KNN
 {
-     interface IKnnTester
-     {
-          INeighbor GetNeighbor(int index);
-          void AddNeighbor(INeighbor neighbor);
-          string TestAndClassify(INeighbor toTest, int k);
-     }
+    internal interface IKnnTester
+    {
+        string TestAndClassify(RecordNeighbor toTest, int k);
+    }
 }

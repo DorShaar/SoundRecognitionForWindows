@@ -1,0 +1,8 @@
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+anothertest.png is not in the Datebase
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.ThrowHelper.ThrowKeyNotFoundException()
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at SoundRecognition.ItemScanner.ScanExistingBarcode(String barcodeImageName) in C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\Scanner\ItemScanner.cs:line 137

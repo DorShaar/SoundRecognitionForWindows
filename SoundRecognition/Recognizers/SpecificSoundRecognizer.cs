@@ -71,13 +71,13 @@ namespace SoundRecognition
                     new RecognizerFinishedEventArgs());
           }
 
-          public void Stop()
+          public void Stop(string stopReason)
           {
                mShouldStop = true;
 
                // Waiting for ProcessNewData to finish.
                mRecognizerFinishedEvent.WaitOne();
-               mLogger.WriteLine($"{nameof(SpecificSoundRecognizer)} stopped");
+               mLogger.WriteLine($"{nameof(SpecificSoundRecognizer)} stopped. Stop Reason: {stopReason}");
           }
 
           private void FileSystemWatcher_Renamed(object sender, RenamedEventArgs e)

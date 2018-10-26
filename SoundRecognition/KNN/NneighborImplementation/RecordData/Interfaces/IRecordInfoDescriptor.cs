@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace SoundRecognition
+﻿
+namespace KNN
 {
-     interface IRecordInfoDescriptor
+     internal interface IRecordInfoDescriptor
      {
           void AddRecognitionTime(double recognitionTime);
      }

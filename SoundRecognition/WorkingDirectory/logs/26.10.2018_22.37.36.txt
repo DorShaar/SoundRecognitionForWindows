@@ -1,0 +1,34 @@
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Stored 56 hashed fingerprints from AlreadyHotWaterBoiling1.wav
+Stored 56 hashed fingerprints from AlreadyHotWaterBoiling2.wav
+Stored 56 hashed fingerprints from waterboiling1_part1.wav
+Stored 56 hashed fingerprints from waterboiling1_part2.wav
+Stored 56 hashed fingerprints from waterboiling2_part1.wav
+Stored 56 hashed fingerprints from waterboiling2_part2.wav
+Stored 56 hashed fingerprints from waterboiling2_part3.wav.wav
+Stored 56 hashed fingerprints from waterboiling2_part4.wav
+Stored 56 hashed fingerprints from waterboiling2_part5.wav.wav
+Stored 56 hashed fingerprints from waterboiling3_part1.wav
+Stored 56 hashed fingerprints from waterboiling3_part2.wav
+Stored 56 hashed fingerprints from waterboiling3_part3.wav
+Stored 56 hashed fingerprints from waterboiling4_part1.wav
+Stored 56 hashed fingerprints from waterboiling4_part2.wav
+Stored 56 hashed fingerprints from waterboiling5_part1.wav
+Stored 56 hashed fingerprints from waterboiling5_part2.wav
+Stored 56 hashed fingerprints from waterboiling5_part3.wav
+Stored 56 hashed fingerprints from waterboiling5_part4.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part1.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part2.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part3.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part4.wav
+Stored 56 hashed fingerprints from WaterBoilingFirst_part5.wav
+Stored 56 hashed fingerprints from WaterBoilingSecond_part1.wav
+Stored 56 hashed fingerprints from WaterBoilingSecond_part2.wav
+Stored 56 hashed fingerprints from WaterBoilingSecond_part3.wav
+Recognizer machine started
+Recognizer machine start working...
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\SubRecords
+New sub record detected: sub_record_0.wav
+Recording...

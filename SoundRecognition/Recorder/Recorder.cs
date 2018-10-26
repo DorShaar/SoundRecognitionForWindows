@@ -29,8 +29,6 @@ namespace SoundRecognition
                {
                     mLogger.WriteError("Start recording failed", e);
                }
-
-               RecordStrategy.DoOperationWhileRecording();
           }
 
           public void Dispose()

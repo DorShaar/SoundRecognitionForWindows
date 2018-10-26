@@ -34,10 +34,6 @@ namespace SoundRecognition
                };
 
                mWaveIn.StartRecording();
-          }
-
-          public void DoOperationWhileRecording()
-          {
                mTimer = new Timer(SendLatestAudioBytes, null, 0, 2);
           }
 
@@ -63,14 +59,5 @@ namespace SoundRecognition
           {
                mBufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
           }
-
-          // TODO Use IN CASE OF WIN FORMS IMPLEMENTATION
-          // Turns off the timer, take as long as we need to plot, then turn the timer back on.
-          //private void Timer_Tick(object sender, EventArgs e)
-          //{
-          //     timerReplot.Enabled = false;
-          //     PlotLatestData();
-          //     timerReplot.Enabled = true;
-          //}
      }
 }

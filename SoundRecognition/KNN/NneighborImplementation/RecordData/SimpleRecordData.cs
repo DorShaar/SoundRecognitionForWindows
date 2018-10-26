@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SoundRecognition
+namespace KNN
 {
-     class SimpleRecordData : IFullRecordData
+     internal class SimpleRecordData : IFullRecordData
      {
           private const int SECTION_SIZE = 3;
 
@@ -182,8 +182,7 @@ namespace SoundRecognition
 
           public double getAvgRecognitionsInSection()
           {
-               //shouldn't be used in this new recordData implementation
-               throw new NotImplementedException();
+               throw new NotImplementedException("That method should not be used in this new recordData implementation");
           }
 
           public double getAvgRecognitionsInSlice()
@@ -198,8 +197,7 @@ namespace SoundRecognition
 
           public IRecordSectionData getLastSection()
           {
-               //shouldn't be used in this new recordData implementation
-               throw new NotImplementedException();
+               throw new NotImplementedException("That method should not be used in this new recordData implementation");
           }
 
           public double getMaxInterval()

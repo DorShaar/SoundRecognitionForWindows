@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RecordInfoDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IntervalsList>
+    <double>0.17500000000000426</double>
+  </IntervalsList>
+  <RecognitionsTimesList>
+    <double>42.449</double>
+    <double>42.624</double>
+  </RecognitionsTimesList>
+  <Duration>60.004</Duration>
+</RecordInfoDescriptor>

@@ -3,6 +3,6 @@ namespace SoundRecognition
 {
      interface IScanner
      {
-          IItemInfo Scan();
+          IItemInfo Scan_obsolete();
      }
 }

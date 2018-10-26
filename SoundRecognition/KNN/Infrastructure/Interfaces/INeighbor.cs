@@ -1,5 +1,5 @@
 ﻿
-namespace SoundRecognition
+namespace KNN
 {
      public interface INeighbor
      {

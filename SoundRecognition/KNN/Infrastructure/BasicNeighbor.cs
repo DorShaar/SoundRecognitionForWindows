@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SoundRecognition
+namespace KNN
 {
-     class BasicNeighbor : INeighbor
+     internal class BasicNeighbor : INeighbor
      {
           private List<double> mParameters;
           public string Classification { get; set; }

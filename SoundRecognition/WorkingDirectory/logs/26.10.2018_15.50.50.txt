@@ -1,0 +1,14 @@
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 5730
+Pop detected after: 6651
+Pop detected after: 10557
+Pop detected after: 11260
+Pop detected after: 13510
+Pop detected after: 14650

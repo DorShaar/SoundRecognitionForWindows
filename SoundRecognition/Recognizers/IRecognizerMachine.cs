@@ -7,7 +7,7 @@ namespace SoundRecognition
           event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
           void LoadProcessedData(string recognizerType, string itemCategory);
           void ProcessNewData(IItemInfo item);
-          void Stop();
+          void Stop(string stopReason);
      }
 
      public enum eRecognitionStatus

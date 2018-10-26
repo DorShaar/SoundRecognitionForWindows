@@ -1,0 +1,49 @@
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Generating string to encode: 30c62655-6833-4e3e-8e22-f12b9a822548
+PopcornTest added to database
+Database saved to C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Database saved to C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 43273
+Pop detected after: 47866
+Pop detected after: 50163
+Pop detected after: 50395
+Pop detected after: 55897
+Pop detected after: 56598
+Pop detected after: 56818
+Pop detected after: 57052
+Pop detected after: 57739
+Pop detected after: 62802
+Pop detected after: 63725
+Pop detected after: 64411
+Pop detected after: 65803
+Pop detected after: 69928
+Pop detected after: 70631
+Pop detected after: 70850
+Pop detected after: 71771
+Pop detected after: 76835
+Pop detected after: 77755
+Pop detected after: 79819
+Pop detected after: 85803
+Pop detected after: 88100
+Pop detected after: 89022
+Pop detected after: 89239
+Pop detected after: 91817
+Pop detected after: 92287
+Pop detected after: 96692
+Pop detected after: 96927
+Pop detected after: 97146
+Pop detected after: 99457
+Pop detected after: 99913
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped. Stop Reason: Machine should stop since reached maximal working time allowed 100000
+Machine stopped
+Recognizer machine turned off

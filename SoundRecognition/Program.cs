@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace SoundRecognition
 {
@@ -14,6 +15,7 @@ namespace SoundRecognition
      // WavFileCreator - DarkGray.
      // WavFile - No logger.
      // ItemToRecognizeDataMap - white.
+     // SerializationMachine - Cyan.
 
 
      // Test: (On raspbery)
@@ -50,14 +52,16 @@ namespace SoundRecognition
 
      class Program
      {
+          [STAThread]
           static void Main(string[] args)
           {
                //UseWaveFile();
                //return;
 
-               Machine machine = new Machine();
-               machine.TurnOn();
-               machine.Run();
+               Application.EnableVisualStyles();
+               Application.SetCompatibleTextRenderingDefault(false);
+               RecognizerMachineManager recognizerMachineManager = new RecognizerMachineManager();
+               recognizerMachineManager.Run();
           }
 
           public static void UseWaveFile()

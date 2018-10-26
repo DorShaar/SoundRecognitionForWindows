@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 
-namespace SoundRecognition
+namespace KNN
 {
-     class NeighborsComparer : Comparer<INeighbor>
+     internal class NeighborsComparer : Comparer<RecordNeighbor>
      {
-          private INeighbor mDistanceMeasureTarget;
+          private RecordNeighbor mDistanceMeasureTarget;
 
-          public NeighborsComparer(INeighbor distanceMeasureTarget)
+          public NeighborsComparer(RecordNeighbor distanceMeasureTarget)
           {
                this.mDistanceMeasureTarget = distanceMeasureTarget;
           }
 
-          public override int Compare(INeighbor x, INeighbor y)
+          public override int Compare(RecordNeighbor x, RecordNeighbor y)
           {
-               return (int)(x.CalculateDistanceFrom(mDistanceMeasureTarget) - y.CalculateDistanceFrom(mDistanceMeasureTarget)); //TODO: test
+               return (int)(x.distanceFrom(mDistanceMeasureTarget) - y.distanceFrom(mDistanceMeasureTarget)); //TODO: test
           }
      }
 }

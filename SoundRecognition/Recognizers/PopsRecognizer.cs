@@ -1,4 +1,5 @@
 ﻿using Accord.Math;
+using KNN;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,11 +10,21 @@ using System.Threading;
 
 namespace SoundRecognition
 {
+     /// <summary>
+     /// Uses Knn to identify popcorn readiness.
+     /// </summary>
      internal class PopsRecognizer : IRecognizerMachine
      {
           private static readonly int MS_IN_ONE_SECOND = 1000;
           private readonly int MAXIMAL_POP_INTERVAL_ALLOWED_IN_MS = 4 * MS_IN_ONE_SECOND;
           private readonly string RECORDS_DIRECTORY_NAME = "RecordsData";
+          private readonly int mSampleRate = 44100;
+
+          // Knn parameters.
+          private readonly int KNN_PARAMETER = 5; // TODO: choose the k parameter
+          private readonly string classificationA = "popcornDone";
+          private readonly string classificationB = "underCooked";
+          private KnnTester mKnnTester;
 
           private readonly string mRecordsDataDirectoryPath;
           private bool mShouldStop = false;
@@ -21,13 +32,13 @@ namespace SoundRecognition
           private Stopwatch mStopwatch = new Stopwatch();
           private readonly Logger mLogger;
 
-          private int mTimeoutCount = 1; // TODO ask Tomer what is that for?
+          private int mTimeoutCount = 1; // TODO ask Tomer what is that for? I thing better name
           private int mSampleCount = 0;
           private List<double> mEnergyForBlocksList = new List<double>();
           private RecordInfoDescriptor mRecordInfoDescriptor = new RecordInfoDescriptor();
-          private KnnTester mKnnTester;
 
           private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(false);
+          public event SendProcessLatestData OnSendProcessLatestData;
           public event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
 
           private enum ePopState
@@ -45,8 +56,12 @@ namespace SoundRecognition
 
           public void LoadProcessedData(string recognizerType, string itemCategory)
           {
-               // TODO TOMER help how to load the xmls?
-               //mKnnTester = new KnnTester(<list>);
+               mKnnTester = new KnnTester(
+                    mRecordsDataDirectoryPath,
+                    recognizerType,
+                    itemCategory,
+                    classificationA,
+                    classificationB);
           }
 
           public void ProcessNewData(IItemInfo itemInfo)
@@ -66,7 +81,7 @@ namespace SoundRecognition
                     // Letting the recorder sending new data untill recognizer is signled to stop.
                     while (!mShouldStop) { };
                     mStopwatch.Stop();
-                    mRecordInfoDescriptor.Save(mRecordsDataDirectoryPath);
+                    mRecordInfoDescriptor.Save(mRecordsDataDirectoryPath); // TODO is it something that we want to do?
                     mLogger.WriteLine($"Record data saved");
                }
 
@@ -74,13 +89,13 @@ namespace SoundRecognition
                mRecognizerFinishedEvent.Set();
           }
 
-          public void Stop()
+          public void Stop(string stopReason)
           {
                mShouldStop = true;
 
                // Waiting for ProcessNewData to finish.
                mRecognizerFinishedEvent.WaitOne();
-               mLogger.WriteLine($"{nameof(PopsRecognizer)} stopped");
+               mLogger.WriteLine($"{nameof(PopsRecognizer)} stopped. Stop Reason: {stopReason}");
 
                // Notifying that the recognizer finished working.
                RecognizerFinished.Invoke(
@@ -88,7 +103,58 @@ namespace SoundRecognition
                     new RecognizerFinishedEventArgs());
           }
 
-          private void ProcessLatestData(Object sender, RecorderUpdateEventArgs e) // ORG: PlotLatestData()
+          private void ProcessLatestData(Object sender, RecorderUpdateEventArgs e)
+          {
+               if (e.AudioBytes.Length == 0)
+                    return;
+               if (e.AudioBytes[(mRecorder.RecordStrategy as RegularRecordStrategy).BufferSize - 2] == 0)
+                    return;
+
+               // Incoming data is 16-bit (2 bytes per audio point).
+               int bytesPerPoint = 2;
+
+               // Creates (32-bit) int array ready to fill with the 16-bit data.
+               int graphPointCount = e.AudioBytes.Length / bytesPerPoint;
+
+               // Create double arrays to hold the data we will graph.
+               double[] pcm = new double[graphPointCount];
+               double[] fft = new double[graphPointCount];
+               double[] fftReal = new double[graphPointCount / 2];
+
+               // Populate Xs and Ys with double data.
+               for (int i = 0; i < graphPointCount; ++i)
+               {
+                    // Reads the int16 from the two bytes.
+                    Int16 val = BitConverter.ToInt16(e.AudioBytes, i * 2);
+
+                    // Stores the value in Ys as a percent (+/- 100% = 200%).
+                    pcm[i] = (double)(val) / Math.Pow(2, 16) * 200.0;
+               }
+
+               // Calculate the full FFT.
+               fft = FFT(pcm);
+
+               // Determine horizontal axis units for graphs.
+               double pcmPointSpacingMs = mSampleRate / 1000;
+               double fftMaxFreq = mSampleRate / 2;
+               double fftPointSpacingHz = fftMaxFreq / graphPointCount;
+
+               // Keeps the real half (the other half imaginary)
+               Array.Copy(fft, fftReal, fftReal.Length);
+
+               System.Drawing.Color graphColor = System.Drawing.Color.Blue;
+               if (Recognize(fftReal) == eRecognitionStatus.Recognized)
+               {
+                    mLogger.WriteLine($"Pop detected after: {mStopwatch.ElapsedMilliseconds}");
+                    graphColor = System.Drawing.Color.Red;
+               }
+
+               // Sends data to draw on UI.
+               OnSendProcessLatestData.Invoke(new SoundVisualizationDataPackage(
+                    pcm, pcmPointSpacingMs, fftReal, fftPointSpacingHz, graphColor));
+          }
+
+          private void ProcessLatestData_working(Object sender, RecorderUpdateEventArgs e) // ORG: PlotLatestData()
           {
                if (e.AudioBytes.Length == 0)
                     return;
@@ -151,11 +217,13 @@ namespace SoundRecognition
                eRecognitionStatus recognitionStatus = eRecognitionStatus.UnRecognized;
                double energySum = CalculateEnergy(values);
 
-               if (mEnergyForBlocksList.Count > 30) // TODO remove back to 1000
+               // We let the blocks list number grow to collect better statistical information.
+               if (mEnergyForBlocksList.Count > 900)
                {
                     double avgEnergy = mEnergyForBlocksList.Sum() / mEnergyForBlocksList.Count;
                     double varianceEnergy = CalculateVariance(avgEnergy);
-                    double factorC = -0.0000015 * varianceEnergy + 1.5142857;
+                    //double factorC = -0.0025714 * varianceEnergy + 1.5142857; // this is the factorC from the original artical (not the same one as in the article above)
+                    double factorC = -0.0000015 * varianceEnergy + 1.5142857; // this is the factorC we were using with the earlier records
 
                     // In that case, pop is recognized.
                     if (energySum > factorC * avgEnergy)
@@ -165,23 +233,31 @@ namespace SoundRecognition
                               mRecordInfoDescriptor.AddRecognitionTime(mStopwatch.ElapsedMilliseconds / 1000.0);
                               recognitionStatus = eRecognitionStatus.Recognized;
                          }
-
-                         if (mSampleCount % 10 == 0)
-                         {
-                              // TODO send to knn.
-                         }
                     }
 
                     mSampleCount++;
                }
 
-               // TODO ASK TOMER what is that block doing?
-               mEnergyForBlocksList.Add(energySum);
-               if (mStopwatch.IsRunning && (mStopwatch.ElapsedMilliseconds / 2000.0 - 2 * mTimeoutCount) > 0)
+               //new improvement:
+               //add use only the first 2000 blocks, in order to reduce the influence of the many pops at the peak,
+               //because when getting around 3000-3500 blocks, a small pop is to close to the avarage 
+               if (mEnergyForBlocksList.Count < 2000)
+               {
+                    mEnergyForBlocksList.Add(energySum);
+               }
+
+               //TODO TELL DOR that this block was a barbaric way to set an interval for updating
+               //the recordInfoDescriptor's Duration property and calculating some properties considering the last "section" of the record. 
+               //Also this is where we test the current record with the KNN tester
+
+               if (mStopwatch.IsRunning && (mStopwatch.ElapsedMilliseconds / 1000.0) > 4 * mTimeoutCount)
                {
                     mTimeoutCount++;
-                    mRecordInfoDescriptor.Duration = mStopwatch.ElapsedMilliseconds / 1000.0;
-                    //TODO: here we can try classify using knn
+                    mRecordInfoDescriptor.UpdateDurationAndLastSection(mStopwatch.ElapsedMilliseconds / 1000.0);
+
+                    RecordNeighbor testObject = mKnnTester.GenerateNeighborFromRecordInfoDescriptor(mRecordInfoDescriptor);
+                    if (mKnnTester.TestAndClassify(testObject, KNN_PARAMETER) == classificationA)
+                         Stop("Recognizer detected that the popcorn is ready");
                }
 
                return recognitionStatus;
@@ -198,16 +274,24 @@ namespace SoundRecognition
                return totalEnergy;
           }
 
+          /// <summary>
+          /// Working on copied list to avoid reading and calculating while other thread is adding values.
+          /// </summary>
+          /// <param name="avgEnergy"></param>
+          /// <returns></returns>
           private double CalculateVariance(double avgEnergy)
           {
                double varianceEnergy = 0;
 
-               foreach (double energy in mEnergyForBlocksList)
+               List<double> energyCopyList = new List<double>(mEnergyForBlocksList);
+
+               foreach (double energy in energyCopyList)
                {
                     varianceEnergy += Math.Pow((avgEnergy - energy), 2);
                }
 
-               varianceEnergy /= mEnergyForBlocksList.Count;
+               varianceEnergy /= energyCopyList.Count;
+
                return varianceEnergy;
           }
      }

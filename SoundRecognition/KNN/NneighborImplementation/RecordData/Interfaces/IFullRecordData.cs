@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SoundRecognition
+namespace KNN
 {
-     interface IFullRecordData
+     internal interface IFullRecordData
      {
           // TODO ask TOMER what is the diff between this and RecordInfoDescriptor?
           // are we using it?

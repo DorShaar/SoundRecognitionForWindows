@@ -16,6 +16,8 @@ namespace SoundRecognition
           private static string mLogTextFilePath;
           private static bool mIsAlreadyCreated = false;
 
+          public static event LogMsg OnLogMsg;
+
           /// <summary>
           /// Logger will log in one text file all the operation of the application.
           /// </summary>
@@ -59,7 +61,7 @@ namespace SoundRecognition
                          streamWriter.WriteLine(textToLog);
                     }
 
-                    PrintToConsole(textToLog, mConsoleColor);
+                    Print(textToLog, mConsoleColor);
                }
           }
 
@@ -73,7 +75,7 @@ namespace SoundRecognition
                          streamWriter.WriteLine(textToLog);
                     }
 
-                    PrintToConsole(textToLog, ConsoleColor.Red);
+                    Print(textToLog, ConsoleColor.Red);
                }
           }
 
@@ -87,12 +89,18 @@ namespace SoundRecognition
                          streamWriter.WriteLine(exception.ToString());
                     }
 
-                    PrintToConsole(textToLog, ConsoleColor.Red);
-                    PrintToConsole(exception.Message, ConsoleColor.Red);
+                    Print(textToLog, ConsoleColor.Red);
+                    Print(exception.Message, ConsoleColor.Red);
                }
           }
 
-          private void PrintToConsole(string textToLog, ConsoleColor consoleColor)
+          private void Print(string textToLog, ConsoleColor consoleColor)
+          {
+               OnLogMsg?.Invoke($"{mWriterName}: {textToLog}", consoleColor);
+               PrintToConsole_obsolete(textToLog, consoleColor);
+          }
+
+          private void PrintToConsole_obsolete(string textToLog, ConsoleColor consoleColor)
           {
                Console.ForegroundColor = consoleColor;
                Console.WriteLine($"{mWriterName}: {textToLog}");

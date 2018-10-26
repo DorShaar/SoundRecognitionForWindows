@@ -1,31 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
-namespace SoundRecognition
+namespace KNN
 {
-     class KnnTester : IKnnTester
+     internal class KnnTester : IKnnTester
      {
-          private List<INeighbor> mNeighbors;
+          private readonly string CLASSIFICATION_A;
+          private readonly string CLASSIFICATION_B;
+          private readonly string mClassADataFilesPath;
+          private readonly string mClassBDataFilesPath;
 
-          public KnnTester(List<INeighbor> initializedList)
+          private List<RecordNeighbor> mNeighbors;
+
+          public KnnTester(string recordsDataPath, string recognizerType, string itemCategory,
+               string classificationAName, string classificationBName)
           {
-               mNeighbors = initializedList ?? throw new Exception("KnnTester's ctor must get initialized list");
+               CLASSIFICATION_A = classificationAName;
+               CLASSIFICATION_B = classificationBName;
+
+               mClassADataFilesPath = Path.Combine(recordsDataPath, recognizerType, itemCategory, classificationAName);
+               Directory.CreateDirectory(mClassADataFilesPath);
+
+               mClassBDataFilesPath = Path.Combine(recordsDataPath, recognizerType, itemCategory, classificationBName);
+               Directory.CreateDirectory(mClassBDataFilesPath);
+
+               GenerateKnnDataSet();
           }
 
-          public void AddNeighbor(INeighbor neighbor)
+          public string TestAndClassify(RecordNeighbor toTest, int k)
           {
-               mNeighbors.Add(neighbor);
-          }
-
-          public INeighbor GetNeighbor(int index)
-          {
-               return mNeighbors[index];
-          }
-
-          public string TestAndClassify(INeighbor toTest, int k)
-          {
-               Dictionary<string, int> classifications = new Dictionary<string, int>();
+               Dictionary<string, double> classifications = new Dictionary<string, double>();
                NeighborsComparer comparer = new NeighborsComparer(toTest);
 
                // Sorting the neighbors set by distance from tested object.
@@ -42,16 +49,16 @@ namespace SoundRecognition
                     }
                     else
                     {
-                         classifications.Add(mNeighbors[i].Classification, 1);
+                         classifications.Add(mNeighbors[i].Classification, 1 / mNeighbors[i].distanceFrom(toTest)); //test!!!!!!!!!!!!!!!!!!
                     }
                }
 
                // Returns the classification of the most common of them
-               // TODO: pay attention to cases of a few different classifications 
+               // pay attention to cases of a few different classifications 
                // with equal amount of repeatitons.
-               List<KeyValuePair<string, int>> maxpairs = new List<KeyValuePair<string, int>>();
-               int max = classifications.Values.Max();
-               foreach (KeyValuePair<String, int> pair in classifications)
+               List<KeyValuePair<string, double>> maxpairs = new List<KeyValuePair<string, double>>();
+               double max = classifications.Values.Max();
+               foreach (KeyValuePair<String, double> pair in classifications)
                {
                     if (pair.Value == max)
                     {
@@ -60,6 +67,58 @@ namespace SoundRecognition
                }
 
                return maxpairs[0].Key;
+          }
+
+          private void GenerateKnnDataSet()
+          {
+               mNeighbors = new List<RecordNeighbor>();
+
+               // Load info descriptors of two classifications.
+               List<RecordInfoDescriptor> classificationARecordInfoDescriptors = LoadRecordInfoDescriptors(mClassADataFilesPath);
+               List<RecordInfoDescriptor> classificationBRecordInfoDescriptors = LoadRecordInfoDescriptors(mClassBDataFilesPath);
+
+               // Creates neighbor from each descriptor with classificationA.
+               foreach (RecordInfoDescriptor recordInfoDescriptor in classificationARecordInfoDescriptors)
+               {
+                    if (recordInfoDescriptor.LastSectionTimeSpan <= 0 || recordInfoDescriptor.AvgInterval <= 0)
+                    {
+                         recordInfoDescriptor.UpdateReloadedProperties(4.0);
+                    }
+
+                    mNeighbors.Add(GenerateNeighborFromRecordInfoDescriptor(recordInfoDescriptor, CLASSIFICATION_A));
+               }
+
+               // Creates neighbor from each descriptor with classificationB.
+               foreach (RecordInfoDescriptor recordInfoDescriptor in classificationBRecordInfoDescriptors)
+               {
+                    if (recordInfoDescriptor.LastSectionTimeSpan <= 0 || recordInfoDescriptor.AvgInterval <= 0)
+                    {
+                         recordInfoDescriptor.UpdateReloadedProperties(4.0);
+                    }
+
+                    mNeighbors.Add(GenerateNeighborFromRecordInfoDescriptor(recordInfoDescriptor, CLASSIFICATION_B));
+               }
+          }
+
+          private List<RecordInfoDescriptor> LoadRecordInfoDescriptors(string xmlFilesDirectoryPath)
+          {
+               List<RecordInfoDescriptor> recordDescriptors = new List<RecordInfoDescriptor>();
+
+               XmlSerializer xmlSerializer = new XmlSerializer(typeof(RecordInfoDescriptor));
+               foreach (string file in Directory.GetFiles(xmlFilesDirectoryPath))
+               {
+                    TextReader textReader = new StreamReader(file);
+                    RecordInfoDescriptor recordInfo = (RecordInfoDescriptor)xmlSerializer.Deserialize(textReader);
+                    recordDescriptors.Add(recordInfo);
+               }
+
+               return recordDescriptors;
+          }
+
+          public RecordNeighbor GenerateNeighborFromRecordInfoDescriptor(
+               RecordInfoDescriptor recordInfoDescriptor, string classification = "none")
+          {
+               return new RecordNeighbor(recordInfoDescriptor, classification);
           }
      }
 }

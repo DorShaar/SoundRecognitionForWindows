@@ -8,17 +8,18 @@ namespace SoundRecognition
      internal class Machine
      {
           private static readonly int MS_IN_ONE_SECOND = 1000;
-          public static readonly int MaximalWorkingTimeInMS = 360 * MS_IN_ONE_SECOND; // 6 minutes.
+          public static readonly int MaximalWorkingTimeInMS = 300 * MS_IN_ONE_SECOND; // 5 minutes.
 
-          //private string mWorkingDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-          // TODO remove this is temp
-          private string mWorkingDirectoryPath = @"C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory";
           private Logger mLogger;
-          private IRecognizerMachine mRecognizer;
-          private IScanner mScanner;
 
-          private IItemInfo mItemInfo = null;
+          public IRecognizerMachine Recognizer { get; private set; }
+          public IItemInfo ItemInfo { get; set; } = null;
+          public ItemScanner Scanner { get; private set; }
+
+          public string WorkingDirectoryPath = @"C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory"; // TODO change to documents
           public MachineStatus Status { get; private set; } = MachineStatus.TurnedOff;
+
+          public event MachineShouldFinish OnMachineShouldFinish;
 
           internal enum MachineStatus
           {
@@ -26,6 +27,23 @@ namespace SoundRecognition
                OnAndNotWorking = 1,
                OnAndWorking = 2,
                OnAndShouldStop = 4
+          }
+
+          /// <summary>
+          /// Logger should initialize first since it is half static and other components should
+          /// be logged.
+          /// </summary>
+          public Machine()
+          {
+               mLogger = new Logger(WorkingDirectoryPath, nameof(Machine), ConsoleColor.DarkYellow);
+          }
+
+          public void TurnOn()
+          {
+               Scanner = new ItemScanner(WorkingDirectoryPath);
+
+               Status = MachineStatus.OnAndNotWorking;
+               mLogger.WriteLine("Recognizer machine turned on");
           }
 
           public void Run()
@@ -60,14 +78,74 @@ namespace SoundRecognition
                }
           }
 
-          public void TurnOn()
+          public void ScanItem()
           {
-               AskConfigureDatabase();
-               mLogger = new Logger(mWorkingDirectoryPath, nameof(Machine), ConsoleColor.DarkYellow);
-               mScanner = new ItemScanner(mWorkingDirectoryPath);
+               if (ItemInfo != null)
+               {
+                    string recognizerType = (Scanner as ItemScanner).
+                         ItemToRecognizeDataMap.GetRecognizerTypeByItem(ItemInfo);
 
-               Status = MachineStatus.OnAndNotWorking;
-               mLogger.WriteLine("Recognizer machine turned on");
+                    Recognizer = MachineRecognizerFactory.CreateRecognizer(
+                        WorkingDirectoryPath,
+                        recognizerType);
+
+                    if (Recognizer != null)
+                    {
+                         Recognizer.RecognizerFinished += SetShouldStopStatus;
+                         string itemCategory = (Scanner as ItemScanner).
+                              ItemToRecognizeDataMap.GetCategoryByItem(ItemInfo);
+                         Recognizer.LoadProcessedData(recognizerType, itemCategory);
+                    }
+                    else
+                    {
+                         mLogger.WriteLine("Scan result: Item has no recognizer");
+                    }
+               }
+               else
+               {
+                    mLogger.WriteLine("Scan result: No recognized item available");
+               }
+          }
+
+          public void StartWorking()
+          {
+               if (ItemInfo == null)
+               {
+                    mLogger.WriteLine($"{nameof(ItemInfo)} is unknown, machine will not start");
+                    return;
+               }
+
+               if (Recognizer == null)
+               {
+                    mLogger.WriteLine($"{nameof(Recognizer)} is unknown, machine will not start");
+                    return;
+               }
+
+               Status = MachineStatus.OnAndWorking;
+               mLogger.WriteLine("Recognizer machine started");
+
+               int maxHeatingTimeAllowedInMS = Math.Min(
+                    (ItemInfo as ItemInfo).MaxHittingTimeInSeconds * MS_IN_ONE_SECOND,
+                    MaximalWorkingTimeInMS);
+
+               Stopwatch stopwatch = new Stopwatch();
+               stopwatch.Start();
+               mLogger.WriteLine("Recognizer machine start working...");
+
+               new Thread(() => Recognizer.ProcessNewData(ItemInfo)).Start();
+
+               while (Status != MachineStatus.OnAndShouldStop)
+               {
+                    if (stopwatch.ElapsedMilliseconds >= maxHeatingTimeAllowedInMS)
+                    {
+                         string stopReason = $"{nameof(Machine)} should stop since reached maximal working time allowed {maxHeatingTimeAllowedInMS}";
+                         Recognizer.Stop(stopReason);
+                         OnMachineShouldFinish.Invoke();
+                    }
+               }
+
+               stopwatch.Stop();
+               StopMachine();
           }
 
           public void TurnOff()
@@ -81,9 +159,9 @@ namespace SoundRecognition
 
           private void AskConfigureDatabase()
           {
-               Console.WriteLine($"Current database directory: {mWorkingDirectoryPath}");
+               Console.WriteLine($"Current database directory: {WorkingDirectoryPath}");
 
-               if (!Directory.Exists(mWorkingDirectoryPath))
+               if (!Directory.Exists(WorkingDirectoryPath))
                {
                     SetDatabasePath();
                }
@@ -125,7 +203,7 @@ namespace SoundRecognition
                     userInput = Console.ReadLine();
                }
 
-               mWorkingDirectoryPath = userInput;
+               WorkingDirectoryPath = userInput;
           }
 
           private void ShowManu()
@@ -139,46 +217,16 @@ namespace SoundRecognition
           private void PrintCurrentItem()
           {
                string itemName;
-               if(mItemInfo == null)
+               if(ItemInfo == null)
                {
                     itemName = "No item in the machine";
                }
                else
                {
-                    itemName = mItemInfo.ItemName;
+                    itemName = ItemInfo.ItemName;
                }
 
                mLogger.WriteLine($"Current Item: {itemName}");
-          }
-
-          private void ScanItem()
-          {
-               mItemInfo = mScanner.Scan();
-               if (mItemInfo != null)
-               {
-                    string recognizerType = (mScanner as ItemScanner).
-                         ItemToRecognizeDataMap.GetRecognizerTypeByItem(mItemInfo);
-
-                    mRecognizer = MachineRecognizerFactory.CreateRecognizer(
-                        mWorkingDirectoryPath,
-                        recognizerType);
-
-                    if (mRecognizer != null)
-                    {
-                         mRecognizer.RecognizerFinished += SetShouldStopStatus;
-                         string itemCategory = (mScanner as ItemScanner).
-                              ItemToRecognizeDataMap.GetCategoryByItem(mItemInfo);
-                         mRecognizer.LoadProcessedData(recognizerType, itemCategory);
-                    }
-                    else
-                    {
-                         mLogger.WriteLine("Scan result: Item has no recognizer");
-                    }
-               }
-               else
-               {
-                    mLogger.WriteLine("Scan result: No recognized item available");
-               }
           }
 
           private void SetShouldStopStatus(object sender, RecognizerFinishedEventArgs eventArgs)
@@ -188,49 +236,9 @@ namespace SoundRecognition
 
           private void StopMachine()
           {
-               mItemInfo = null;
+               ItemInfo = null;
                Status = MachineStatus.OnAndNotWorking;
                mLogger.WriteLine("Machine stopped");
-          }
-
-          private void StartWorking()
-          {
-               if (mItemInfo == null)
-               {
-                    mLogger.WriteLine($"{nameof(mItemInfo)} is unknown, machine will not start");
-                    return;
-               }
-
-               if (mRecognizer == null)
-               {
-                    mLogger.WriteLine($"{nameof(mRecognizer)} is unknown, machine will not start");
-                    return;
-               }
-
-               Status = MachineStatus.OnAndWorking;
-               mLogger.WriteLine("Recognizer machine started");
-
-               int maxHeatingTimeAllowedInMS = Math.Min(
-                    (mItemInfo as ItemInfo).MaxHittingTimeInSeconds * MS_IN_ONE_SECOND,
-                    MaximalWorkingTimeInMS);
-
-               Stopwatch stopwatch = new Stopwatch();
-               stopwatch.Start();
-               mLogger.WriteLine("Recognizer machine start working...");
-
-               new Thread(() => mRecognizer.ProcessNewData(mItemInfo)).Start();
-
-               while (Status != MachineStatus.OnAndShouldStop)
-               {
-                    if (stopwatch.ElapsedMilliseconds >= maxHeatingTimeAllowedInMS)
-                    {
-                         mRecognizer.Stop();
-                         mLogger.WriteLine($"{nameof(Machine)} should stop since reached maximal working time allowed {maxHeatingTimeAllowedInMS}");
-                    }
-               }
-
-               stopwatch.Stop();
-               StopMachine();
           }
      }
 }

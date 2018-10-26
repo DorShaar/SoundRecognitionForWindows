@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SoundRecognition
+namespace KNN
 {
-    class BasicRecordSliceData : IRecordSliceData
+    internal class BasicRecordSliceData : IRecordSliceData
     {
         private List<Double> m_recognitonsTimes;
         private double m_duration;
@@ -71,7 +71,7 @@ namespace SoundRecognition
             double? result = null;
             if (m_recognitonsTimes.Count > 0)
             {
-                result = m_recognitonsTimes.Last(); //TODO: check
+                result = m_recognitonsTimes.Last(); 
             }
             return result;
         }
