@@ -16,10 +16,11 @@ namespace SoundRecognition
           public IItemInfo ItemInfo { get; set; } = null;
           public ItemScanner Scanner { get; private set; }
 
-          public string WorkingDirectoryPath = @"C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory"; // TODO change to documents
+          public string WorkingDirectoryPath = @"C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory"; // TODO change to documents
           public MachineStatus Status { get; private set; } = MachineStatus.TurnedOff;
 
           public event MachineShouldFinish OnMachineShouldFinish;
+          public event MachineSetItemInfo OnMachineTurnOff;
 
           internal enum MachineStatus
           {
@@ -125,7 +126,7 @@ namespace SoundRecognition
                mLogger.WriteLine("Recognizer machine started");
 
                int maxHeatingTimeAllowedInMS = Math.Min(
-                    (ItemInfo as ItemInfo).MaxHittingTimeInSeconds * MS_IN_ONE_SECOND,
+                    (ItemInfo as ItemInfo).MaxHeatingTimeInSeconds * MS_IN_ONE_SECOND,
                     MaximalWorkingTimeInMS);
 
                Stopwatch stopwatch = new Stopwatch();
@@ -136,6 +137,7 @@ namespace SoundRecognition
 
                while (Status != MachineStatus.OnAndShouldStop)
                {
+                    // Checks if the machine reaches timeout.
                     if (stopwatch.ElapsedMilliseconds >= maxHeatingTimeAllowedInMS)
                     {
                          string stopReason = $"{nameof(Machine)} should stop since reached maximal working time allowed {maxHeatingTimeAllowedInMS}";
@@ -152,58 +154,13 @@ namespace SoundRecognition
           {
                if (Status != MachineStatus.TurnedOff)
                {
+                    Recognizer?.Stop($"{nameof(Machine)} requested tp be turned off");
+                    OnMachineShouldFinish.Invoke();
+                    ClearItemInfo();
                     Status = MachineStatus.TurnedOff;
+                    OnMachineTurnOff?.Invoke(null);
                     mLogger.WriteLine("Recognizer machine turned off");
                }
-          }
-
-          private void AskConfigureDatabase()
-          {
-               Console.WriteLine($"Current database directory: {WorkingDirectoryPath}");
-
-               if (!Directory.Exists(WorkingDirectoryPath))
-               {
-                    SetDatabasePath();
-               }
-               else
-               {
-                    Console.WriteLine("Would you like to change database path?");
-                    string userInput = Console.ReadLine();
-                    bool isUserInputValid = false;
-                    while (!isUserInputValid)
-                    {
-                         switch (userInput.ToLower())
-                         {
-                              case "y":
-                              case "yes":
-                                   SetDatabasePath();
-                                   isUserInputValid = true;
-                                   break;
-                              case "n":
-                              case "no":
-                                   isUserInputValid = true;
-                                   break;
-                              default:
-                                   Console.WriteLine("Invalid input. Type again");
-                                   userInput = Console.ReadLine();
-                                   break;
-                         }
-                    }
-               }
-          }
-
-          private void SetDatabasePath()
-          {
-               Console.WriteLine($"Please enter valid path for database");
-               string userInput = Console.ReadLine();
-
-               while (!Directory.Exists(userInput))
-               {
-                    Console.WriteLine($"{userInput} does not exist. Please enter valid path for database");
-                    userInput = Console.ReadLine();
-               }
-
-               WorkingDirectoryPath = userInput;
           }
 
           private void ShowManu()
@@ -217,7 +174,7 @@ namespace SoundRecognition
           private void PrintCurrentItem()
           {
                string itemName;
-               if(ItemInfo == null)
+               if (ItemInfo == null)
                {
                     itemName = "No item in the machine";
                }
@@ -236,9 +193,65 @@ namespace SoundRecognition
 
           private void StopMachine()
           {
-               ItemInfo = null;
+               ClearItemInfo();
                Status = MachineStatus.OnAndNotWorking;
                mLogger.WriteLine("Machine stopped");
+          }
+
+          private void ClearItemInfo()
+          {
+               ItemInfo = null;
+          }
+
+          // Obsolete methods.
+
+          private void AskConfigureDatabase_obsolete()
+          {
+               Console.WriteLine($"Current database directory: {WorkingDirectoryPath}");
+
+               if (!Directory.Exists(WorkingDirectoryPath))
+               {
+                    SetDatabasePath_obsolete();
+               }
+               else
+               {
+                    Console.WriteLine("Would you like to change database path?");
+                    string userInput = Console.ReadLine();
+                    bool isUserInputValid = false;
+                    while (!isUserInputValid)
+                    {
+                         switch (userInput.ToLower())
+                         {
+                              case "y":
+                              case "yes":
+                                   SetDatabasePath_obsolete();
+                                   isUserInputValid = true;
+                                   break;
+                              case "n":
+                              case "no":
+                                   isUserInputValid = true;
+                                   break;
+                              default:
+                                   Console.WriteLine("Invalid input. Type again");
+                                   userInput = Console.ReadLine();
+                                   break;
+                         }
+                    }
+               }
+          }
+
+          private void SetDatabasePath_obsolete()
+          {
+               Console.WriteLine($"Please enter valid path for database");
+               string userInput = Console.ReadLine();
+
+               while (!Directory.Exists(userInput))
+               {
+                    Console.WriteLine($"{userInput} does not exist. Please enter valid path for database");
+                    userInput = Console.ReadLine();
+               }
+
+               WorkingDirectoryPath = userInput;
           }
      }
 }

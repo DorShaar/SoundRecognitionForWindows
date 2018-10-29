@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using ScottPlotMicrophoneFFT;
 
 namespace SoundRecognition
 {
@@ -12,10 +11,11 @@ namespace SoundRecognition
      public delegate void StartMachine();
      public delegate void UpdateWorkingDirectory(string newPath);
 
-     public delegate string AddNewItem(string newItem, int maxHittingTimeInSec, string recognitionType, string category);
+     public delegate string AddNewItem(string newItem, int maxHeatingTimeInSec, string recognitionType, string category);
      public delegate void ScanExistingItem(string imagePath);
 
      public delegate void MachineShouldFinish();
+     public delegate void MachineSetItemInfo(IItemInfo itemInfo);
 
      public delegate void SendProcessLatestData(SoundVisualizationDataPackage package);
 
@@ -26,7 +26,7 @@ namespace SoundRecognition
           private Machine mMachine = new Machine();
           private MachineUI mMachineUI = new MachineUI();
           private ScannerUI mScannerUI = new ScannerUI();
-          private SoundVisualizationUI mSoundVisualization = new SoundVisualizationUI();
+          private Thread soundVisualizingThread = null;
 
           public RecognizerMachineManager()
           {
@@ -40,14 +40,19 @@ namespace SoundRecognition
 
           private void Initialize()
           {
+               InitializeMachine();
                InitializeMachineUI();
                InitializeScannerUI();
 
-               mMachine.OnMachineShouldFinish += CloseSoundsVisualizationForm;
-               Logger.OnLogMsg += WriteLogToUI;
+               mMachine.OnMachineShouldFinish += DisableSoundsVisualizationForm;
           }
 
           // Machine Methods.
+
+          private void InitializeMachine()
+          {
+               mMachine.OnMachineTurnOff += mMachineUI.UpdateMachineItemName;
+          }
 
           private void InitializeMachineUI()
           {
@@ -78,8 +83,8 @@ namespace SoundRecognition
 
           private void ScanItem()
           {
-               Thread thread = new Thread(() => OpenScannerForm());
-               thread.Start();
+               soundVisualizingThread = new Thread(() => OpenScannerForm());
+               soundVisualizingThread.Start();
           }
 
           private void StartMachine()
@@ -87,10 +92,8 @@ namespace SoundRecognition
                // In case recognizer is a "PopsRecognizer type, it registers the OnSendProcessLatestData event.
                if (mMachine.Recognizer is PopsRecognizer)
                {
-                    (mMachine.Recognizer as PopsRecognizer).OnSendProcessLatestData += mSoundVisualization.DrawData;
-
-                    Thread thread = new Thread(() => OpenForm(mSoundVisualization));
-                    thread.Start();
+                    (mMachine.Recognizer as PopsRecognizer).OnSendProcessLatestData += mMachineUI.DrawData;
+                    mMachineUI.SetSoundVisulalization(true);
                }
 
                mMachine.StartWorking();
@@ -111,7 +114,7 @@ namespace SoundRecognition
           private void InitializeScannerUI()
           {
                mScannerUI.OnAddNewBarcode += AddNewItem;
-               mScannerUI.OnScanBarcode += ScanBarcode;
+               mScannerUI.OnScanExistingBarcode += ScanBarcode;
           }
 
           private void OpenScannerForm()
@@ -129,13 +132,13 @@ namespace SoundRecognition
           /// <summary>
           /// Add new barcode to the database. Returns the full path of the barcode image.
           /// </summary>
-          private string AddNewItem(string productName, int maxHittingTimeInSeconds, string recognitionType, string category)
+          private string AddNewItem(string productName, int maxHeatingTimeInSeconds, string recognitionType, string category)
           {
-               string barcodeImagePath;
+               string barcodeImagePath = null;
 
                mMachine.ItemInfo = mMachine.Scanner.CreateNewBarcode(
                     productName,
-                    maxHittingTimeInSeconds,
+                    maxHeatingTimeInSeconds,
                     recognitionType,
                     category);
 
@@ -148,24 +151,15 @@ namespace SoundRecognition
           private void ScanBarcode(string imagePath)
           {
                mMachine.ItemInfo = mMachine.Scanner.ScanExistingBarcode(imagePath);
-               if (mMachine.ItemInfo != null)
-                    mMachineUI.UpdateMachineItemName(mMachine.ItemInfo.ItemName);
-
+               mMachineUI.UpdateMachineItemName(mMachine.ItemInfo);
                mMachine.ScanItem();
           }
 
           // SoundVisualizationUI Methods.
 
-          private void CloseSoundsVisualizationForm()
+          private void DisableSoundsVisualizationForm()
           {
-               ThreadHelper.CloseForm(mSoundVisualization);
-          }
-
-          // Logger methods.
-
-          private void WriteLogToUI(string msgToLog, ConsoleColor color)
-          {
-               mMachineUI.LogMsg(msgToLog, color);
+               mMachineUI.SetSoundVisulalization(false);
           }
      }
 }

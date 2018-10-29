@@ -4,11 +4,24 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ScottPlot
+namespace SoundRecognition
 {
      public partial class SoundVisualizationUserControl : UserControl
      {
           public Figure Figure = new Figure(123, 123);
+
+          public SoundVisualizationUserControl()
+          {
+               InitializeComponent();
+
+               // add a mousewheel scroll handler
+               pictureBox1.MouseWheel += new MouseEventHandler(this.pictureBox1_MouseWheel);
+
+               // style the plot area
+               Figure.styleForm();
+               Figure.Zoom(.8, .8);
+               Figure.labelTitle = "FFT";
+          }
 
           private class SignalData
           {
@@ -141,19 +154,6 @@ namespace ScottPlot
                }
           }
 
-          public SoundVisualizationUserControl(string lableTitle)
-          {
-               InitializeComponent();
-
-               // add a mousewheel scroll handler
-               pictureBox1.MouseWheel += new MouseEventHandler(this.pictureBox1_MouseWheel);
-
-               // style the plot area
-               Figure.styleForm();
-               Figure.Zoom(.8, .8);
-               Figure.labelTitle = lableTitle;
-          }
-
           public void AxisAuto()
           {
                double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
@@ -202,7 +202,6 @@ namespace ScottPlot
                     Figure.AxisSet(x1, x2, y1, y2);
                     Figure.Zoom(null, .9);
                     Render(true);
-
                }
                catch (InvalidOperationException)
                {
@@ -273,7 +272,7 @@ namespace ScottPlot
 
           private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
           {
-               if (e.Button == MouseButtons.Middle) AxisAuto(); // middle click to reset view
+               if (e.Button == MouseButtons.Middle) AxisAuto(); // Middle click to reset view.
           }
 
           private void pictureBox1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)

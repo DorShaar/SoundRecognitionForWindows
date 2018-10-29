@@ -1,0 +1,90 @@
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 51563
+Pop detected after: 57204
+Pop detected after: 65127
+Pop detected after: 71902
+Pop detected after: 86351
+Pop detected after: 86751
+Pop detected after: 87269
+Pop detected after: 92933
+Pop detected after: 95708
+Pop detected after: 97408
+Pop detected after: 98328
+Pop detected after: 98562
+Pop detected after: 100342
+Pop detected after: 100615
+Pop detected after: 101536
+Pop detected after: 102710
+Pop detected after: 102955
+Pop detected after: 103258
+Pop detected after: 105484
+Pop detected after: 105867
+Pop detected after: 106160
+Pop detected after: 107643
+Pop detected after: 108649
+Pop detected after: 109139
+Pop detected after: 109644
+Pop detected after: 110167
+Pop detected after: 110785
+Pop detected after: 111623
+Pop detected after: 112425
+Pop detected after: 113066
+Pop detected after: 113261
+Pop detected after: 113708
+Pop detected after: 114363
+Pop detected after: 115013
+Pop detected after: 119786
+Pop detected after: 120659
+Pop detected after: 121889
+Pop detected after: 122235
+Pop detected after: 126912
+Pop detected after: 127164
+Pop detected after: 129004
+Pop detected after: 129303
+Pop detected after: 129822
+Pop detected after: 130154
+Pop detected after: 130979
+Pop detected after: 131316
+Pop detected after: 133065
+Pop detected after: 133386
+Pop detected after: 133670
+Pop detected after: 134298
+Pop detected after: 134608
+Pop detected after: 134994
+Pop detected after: 135623
+Pop detected after: 136772
+Pop detected after: 137383
+Pop detected after: 138726
+Pop detected after: 139012
+Pop detected after: 140195
+Pop detected after: 144189
+Pop detected after: 144922
+Pop detected after: 147396
+Pop detected after: 147691
+Pop detected after: 148260
+Pop detected after: 148506
+Pop detected after: 150699
+Pop detected after: 153087
+Pop detected after: 153385
+Pop detected after: 153665
+Pop detected after: 156438
+Pop detected after: 156774
+Pop detected after: 157519
+Pop detected after: 159387
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped. Stop Reason: Recognizer detected that the popcorn is ready
+Machine stopped
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...

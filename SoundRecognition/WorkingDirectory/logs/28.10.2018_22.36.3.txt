@@ -1,0 +1,8 @@
+Database loaded from C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...

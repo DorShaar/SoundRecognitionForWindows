@@ -1,4 +1,4 @@
-﻿namespace ScottPlot
+﻿namespace SoundRecognition
 {
     partial class SoundVisualizationUserControl
     {

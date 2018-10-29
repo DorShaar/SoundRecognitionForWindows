@@ -16,6 +16,7 @@ namespace SoundRecognition
      // WavFile - No logger.
      // ItemToRecognizeDataMap - white.
      // SerializationMachine - Cyan.
+     // KNN - White.
 
 
      // Test: (On raspbery)

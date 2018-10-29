@@ -41,11 +41,11 @@ namespace SoundRecognition
 ");
           }
 
-          public IItemInfo CreateNewBarcode(string productName, int maxHittingTimeInSeconds,
+          public IItemInfo CreateNewBarcode(string productName, int maxHeatingTimeInSeconds,
                string recognitionType, string category)
           {
                IItemInfo itemInfo = null;
-               if (productName != null && maxHittingTimeInSeconds > 0 && recognitionType != null && category != null)
+               if (productName != null && maxHeatingTimeInSeconds > 0 && recognitionType != null && category != null)
                {
                     // Created barcodes directory in case there is no existing one.
                     Directory.CreateDirectory(BarcodesDirectoryPath);
@@ -73,7 +73,7 @@ namespace SoundRecognition
 
                     // Adding the new item to DB.
                     itemInfo = new ItemInfo(
-                         stringToEncode, maxHittingTimeInSeconds, productName);
+                         stringToEncode, maxHeatingTimeInSeconds, productName);
                     mItemsDictionary.Add(stringToEncode, itemInfo);
                     mLogger.WriteLine($"{itemInfo.ItemName} added to database");
 
@@ -84,7 +84,7 @@ namespace SoundRecognition
                {
                     mLogger.WriteError($@"One of more of the next variables is invalid:
 {nameof(productName)}:{productName}
-{nameof(maxHittingTimeInSeconds)}:{maxHittingTimeInSeconds}
+{nameof(maxHeatingTimeInSeconds)}:{maxHeatingTimeInSeconds}
 {nameof(recognitionType)}:{recognitionType}
 {nameof(category)}:{category}");
                }
@@ -97,6 +97,7 @@ namespace SoundRecognition
                IItemInfo item = null;
 
                string barcodeImagePath = Path.Combine(BarcodesDirectoryPath, barcodeImageName);
+               barcodeImagePath = GetBarcodeNameWithExtension(barcodeImagePath, PNG_EXTENSION);
                if (File.Exists(barcodeImagePath))
                {
                     // Loads the qrCode as a bitmap and decodes it into a text.
@@ -120,6 +121,17 @@ namespace SoundRecognition
                }
 
                return item;
+          }
+
+          private string GetBarcodeNameWithExtension(string barcodeName, string extension)
+          {
+               string nameWithExtension;
+               if (Path.GetExtension(barcodeName).ToLower().Equals(extension))
+                    nameWithExtension = barcodeName;
+               else
+                    nameWithExtension = barcodeName + extension;
+
+               return nameWithExtension;
           }
 
           private void LoadDatabases()
@@ -177,14 +189,14 @@ namespace SoundRecognition
                // Created barcodes directory in case there is no existing one.
                Directory.CreateDirectory(BarcodesDirectoryPath);
 
-               // Gets from user: product name and max hitting time for product.
+               // Gets from user: product name and max Heating time for product.
                mLogger.WriteLine("Type the name of the product to register");
                string productName = Console.ReadLine();
 
-               mLogger.WriteLine("Type number of maximal saftey hitting time in seconds ");
+               mLogger.WriteLine("Type number of maximal saftey Heating time in seconds ");
                string userInput = Console.ReadLine();
-               int maxHittingTimeInSeconds;
-               while (!int.TryParse(userInput, out maxHittingTimeInSeconds))
+               int maxHeatingTimeInSeconds;
+               while (!int.TryParse(userInput, out maxHeatingTimeInSeconds))
                {
                     mLogger.WriteError($"{userInput} is invalid input, type again");
                     userInput = Console.ReadLine();
@@ -206,7 +218,7 @@ namespace SoundRecognition
 
                // Adding the new item to DB.
                IItemInfo itemInfo = new ItemInfo(
-                    stringToEncode, maxHittingTimeInSeconds, productName);
+                    stringToEncode, maxHeatingTimeInSeconds, productName);
                mItemsDictionary.Add(stringToEncode, itemInfo);
                mLogger.WriteLine($"{itemInfo.ItemName} added to database");
 

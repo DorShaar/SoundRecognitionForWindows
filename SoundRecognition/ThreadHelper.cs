@@ -8,6 +8,7 @@ namespace SoundRecognition
           delegate void SetTextCallback(Form form, Control control, string text);
           delegate void SetTextToRichBoxCallback(Form form, RichTextBox richTextBox, string text);
           delegate void CloseFormCallback(Form form);
+          delegate void SetEnabledPropertyCallback(Form form, Control control, bool isEnabled);
 
           /// <summary>
           /// Set text property of various controls
@@ -46,6 +47,19 @@ namespace SoundRecognition
                {
                     richTextBox.AppendText(text);
                     richTextBox.AppendText(Environment.NewLine + Environment.NewLine);
+               }
+          }
+
+          public static void SetEnabledProperty(Form form, Control control, bool isEnabled)
+          {
+               if (control.InvokeRequired)
+               {
+                    SetEnabledPropertyCallback setTextcallbackFunction = new SetEnabledPropertyCallback(SetEnabledProperty);
+                    form.Invoke(setTextcallbackFunction, new object[] { form, control, isEnabled });
+               }
+               else
+               {
+                    control.Enabled = isEnabled;
                }
           }
 

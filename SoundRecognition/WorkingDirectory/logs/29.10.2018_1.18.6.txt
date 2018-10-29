@@ -1,0 +1,11 @@
+Database loaded from C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Generating string to encode: b164e35b-b2d7-4f56-8b45-ab75a45e5430
+eee added to database
+Database saved to C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Database saved to C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Error!
+No such directory: C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\SubRecords\Fingerprints\SpecificSoundRequired\tost
+Error!
+C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\Barcodes\eee.png does not exist in C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\Barcodes

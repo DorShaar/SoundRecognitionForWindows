@@ -1,0 +1,134 @@
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Generating string to encode: a2608e66-bc0d-4ac0-9168-99aa42384d6d
+test1 added to database
+Database saved to F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Database saved to F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 42378
+Pop detected after: 44500
+Pop detected after: 61361
+Pop detected after: 64356
+Pop detected after: 66649
+Pop detected after: 71251
+Pop detected after: 74744
+Pop detected after: 75884
+Pop detected after: 80267
+Pop detected after: 81188
+Pop detected after: 83714
+Pop detected after: 84167
+Pop detected after: 84853
+Pop detected after: 87614
+Pop detected after: 87848
+Pop detected after: 88081
+Pop detected after: 90156
+Pop detected after: 90842
+Pop detected after: 91982
+Pop detected after: 92450
+Pop detected after: 93417
+Pop detected after: 93651
+Pop detected after: 93884
+Pop detected after: 95243
+Pop detected after: 95477
+Pop detected after: 95990
+Pop detected after: 96442
+Pop detected after: 97363
+Pop detected after: 98065
+Pop detected after: 98284
+Pop detected after: 99438
+Pop detected after: 99672
+Pop detected after: 100825
+Pop detected after: 101045
+Pop detected after: 102432
+Pop detected after: 102885
+Pop detected after: 103119
+Pop detected after: 103572
+Pop detected after: 104040
+Pop detected after: 105193
+Pop detected after: 106114
+Pop detected after: 106566
+Pop detected after: 107253
+Pop detected after: 107721
+Pop detected after: 107956
+Pop detected after: 108172
+Pop detected after: 109327
+Pop detected after: 111167
+Pop detected after: 112775
+Pop detected after: 113008
+Pop detected after: 113243
+Pop detected after: 113696
+Pop detected after: 113930
+Pop detected after: 114163
+Pop detected after: 114850
+Pop detected after: 115084
+Pop detected after: 115520
+Pop detected after: 115755
+Pop detected after: 117143
+Pop detected after: 117829
+Pop detected after: 118064
+Pop detected after: 118282
+Pop detected after: 118984
+Pop detected after: 119435
+Pop detected after: 121042
+Pop detected after: 122197
+Pop detected after: 122649
+Pop detected after: 123116
+Pop detected after: 123802
+Pop detected after: 124271
+Pop detected after: 124957
+Pop detected after: 125878
+Pop detected after: 126799
+Pop detected after: 127485
+Pop detected after: 128405
+Pop detected after: 128639
+Pop detected after: 129091
+Pop detected after: 130480
+Pop detected after: 130932
+Pop detected after: 131851
+Pop detected after: 132319
+Pop detected after: 132553
+Pop detected after: 133692
+Pop detected after: 133927
+Pop detected after: 134161
+Pop detected after: 135767
+Pop detected after: 136454
+Pop detected after: 137373
+Pop detected after: 139028
+Pop detected after: 139714
+Pop detected after: 140182
+Pop detected after: 140635
+Pop detected after: 142023
+Pop detected after: 142475
+Pop detected after: 143395
+Pop detected after: 144549
+Pop detected after: 145469
+Pop detected after: 145687
+Pop detected after: 146155
+Pop detected after: 146843
+Pop detected after: 147077
+Pop detected after: 149603
+Pop detected after: 150290
+Pop detected after: 151678
+Pop detected after: 151912
+Pop detected after: 152131
+Pop detected after: 155358
+Pop detected after: 156279
+Pop detected after: 157418
+Pop detected after: 157653
+Pop detected after: 158338
+Pop detected after: 159493
+Record data saved
+Stopped recording
+Stopped processing new data
+PopsRecognizer stopped. Stop Reason: Recognizer detected that the popcorn is ready
+Machine stopped
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...

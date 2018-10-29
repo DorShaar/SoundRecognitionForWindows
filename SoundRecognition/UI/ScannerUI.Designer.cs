@@ -56,7 +56,7 @@
                this.ScanBarcodeButton.TabIndex = 1;
                this.ScanBarcodeButton.Text = "Scan Barcode";
                this.ScanBarcodeButton.UseVisualStyleBackColor = true;
-               this.ScanBarcodeButton.Click += new System.EventHandler(this.ScanBarcodeButton_Click);
+               this.ScanBarcodeButton.Click += new System.EventHandler(this.ScanExistingBarcodeButton_Click);
                // 
                // ImageList
                // 

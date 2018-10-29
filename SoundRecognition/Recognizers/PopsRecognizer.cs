@@ -21,23 +21,24 @@ namespace SoundRecognition
           private readonly int mSampleRate = 44100;
 
           // Knn parameters.
-          private readonly int KNN_PARAMETER = 5; // TODO: choose the k parameter
+          private readonly int KNN_PARAMETER = 5; // TODO: choose the k parameter. SO 5 is good?
           private readonly string classificationA = "popcornDone";
           private readonly string classificationB = "underCooked";
           private KnnTester mKnnTester;
 
           private readonly string mRecordsDataDirectoryPath;
+          private bool mIsStopped = false;
           private bool mShouldStop = false;
           private Recorder mRecorder;
           private Stopwatch mStopwatch = new Stopwatch();
           private readonly Logger mLogger;
 
-          private int mTimeoutCount = 1; // TODO ask Tomer what is that for? I thing better name
+          private int mIntervalsInSeconds = 4;
           private int mSampleCount = 0;
           private List<double> mEnergyForBlocksList = new List<double>();
           private RecordInfoDescriptor mRecordInfoDescriptor = new RecordInfoDescriptor();
 
-          private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(false);
+          private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(true);
           public event SendProcessLatestData OnSendProcessLatestData;
           public event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
 
@@ -66,6 +67,7 @@ namespace SoundRecognition
 
           public void ProcessNewData(IItemInfo itemInfo)
           {
+               mRecognizerFinishedEvent.Reset();
                mLogger.WriteLine("Start processing new data");
                using (RegularRecordStrategy recordStrategy = new RegularRecordStrategy())
                using (mRecorder = new Recorder(mRecordsDataDirectoryPath, recordStrategy))
@@ -78,11 +80,10 @@ namespace SoundRecognition
                     // Start listening and recording.
                     mRecorder.Record();
 
-                    // Letting the recorder sending new data untill recognizer is signled to stop.
+                    // Letting the recorder sending new data until recognizer is signled to stop.
                     while (!mShouldStop) { };
-                    mStopwatch.Stop();
-                    mRecordInfoDescriptor.Save(mRecordsDataDirectoryPath); // TODO is it something that we want to do?
-                    mLogger.WriteLine($"Record data saved");
+                    mStopwatch.Stop();  
+                    mRecordInfoDescriptor.Save(mRecordsDataDirectoryPath);
                }
 
                mLogger.WriteLine("Stopped processing new data");
@@ -91,16 +92,20 @@ namespace SoundRecognition
 
           public void Stop(string stopReason)
           {
-               mShouldStop = true;
+               if(!mIsStopped)
+               {
+                    mShouldStop = true;
 
-               // Waiting for ProcessNewData to finish.
-               mRecognizerFinishedEvent.WaitOne();
-               mLogger.WriteLine($"{nameof(PopsRecognizer)} stopped. Stop Reason: {stopReason}");
+                    // Waiting for ProcessNewData to finish.
+                    mRecognizerFinishedEvent.WaitOne();
+                    mIsStopped = true;
+                    mLogger.WriteLine($"{nameof(PopsRecognizer)} stopped. Stop Reason: {stopReason}");
 
-               // Notifying that the recognizer finished working.
-               RecognizerFinished.Invoke(
-                    this,
-                    new RecognizerFinishedEventArgs());
+                    // Notifying that the recognizer finished working.
+                    RecognizerFinished.Invoke(
+                         this,
+                         new RecognizerFinishedEventArgs());
+               }
           }
 
           private void ProcessLatestData(Object sender, RecorderUpdateEventArgs e)
@@ -228,7 +233,7 @@ namespace SoundRecognition
                     // In that case, pop is recognized.
                     if (energySum > factorC * avgEnergy)
                     {
-                         if (mSampleCount % 5 == 0) // TODO consider cause with it recognizer much less.
+                         if (mSampleCount % 5 == 0)
                          {
                               mRecordInfoDescriptor.AddRecognitionTime(mStopwatch.ElapsedMilliseconds / 1000.0);
                               recognitionStatus = eRecognitionStatus.Recognized;
@@ -239,20 +244,15 @@ namespace SoundRecognition
                }
 
                //new improvement:
-               //add use only the first 2000 blocks, in order to reduce the influence of the many pops at the peak,
-               //because when getting around 3000-3500 blocks, a small pop is to close to the avarage 
+               // Adds use only the first 2000 blocks, in order to reduce the influence of the many pops at the peak,
+               // because when getting around 3000-3500 blocks, a small pop is to close to the avarage. 
                if (mEnergyForBlocksList.Count < 2000)
-               {
                     mEnergyForBlocksList.Add(energySum);
-               }
 
-               //TODO TELL DOR that this block was a barbaric way to set an interval for updating
-               //the recordInfoDescriptor's Duration property and calculating some properties considering the last "section" of the record. 
-               //Also this is where we test the current record with the KNN tester
-
-               if (mStopwatch.IsRunning && (mStopwatch.ElapsedMilliseconds / 1000.0) > 4 * mTimeoutCount)
+               /// Every <see cref="mIntervalsInSeconds"/> seconds sending test object to the KNN tester.
+               if (mStopwatch.IsRunning && (mStopwatch.ElapsedMilliseconds / 1000.0) > 4 * mIntervalsInSeconds)
                {
-                    mTimeoutCount++;
+                    mIntervalsInSeconds++;
                     mRecordInfoDescriptor.UpdateDurationAndLastSection(mStopwatch.ElapsedMilliseconds / 1000.0);
 
                     RecordNeighbor testObject = mKnnTester.GenerateNeighborFromRecordInfoDescriptor(mRecordInfoDescriptor);

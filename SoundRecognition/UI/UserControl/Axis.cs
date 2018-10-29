@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScottPlot
+namespace SoundRecognition
 {
      public class Axis
      {

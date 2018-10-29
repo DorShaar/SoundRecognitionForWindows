@@ -1,0 +1,3 @@
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on

@@ -1,7 +1,7 @@
 ﻿
 namespace SoundRecognition
 {
-     interface IItemInfo
+     public interface IItemInfo
      {
           string Barcode { get; }
           string ItemName{ get; }

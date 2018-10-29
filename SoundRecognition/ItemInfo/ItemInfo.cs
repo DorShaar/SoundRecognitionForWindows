@@ -6,15 +6,15 @@ namespace SoundRecognition
      class ItemInfo : IItemInfo
      {
           public string Barcode { get; private set; }
-          public int MaxHittingTimeInSeconds { get; private set; }
+          public int MaxHeatingTimeInSeconds { get; private set; }
           public string ItemName { get; private set; }
           public static ItemInfo DefaultItem =
                new ItemInfo("", Machine.MaximalWorkingTimeInMS, "Default Item");
 
-          public ItemInfo(string barcode, int hittingTimeInSec, string itemName)
+          public ItemInfo(string barcode, int heatingTimeInSec, string itemName)
           {
                Barcode = barcode;
-               MaxHittingTimeInSeconds = hittingTimeInSec;
+               MaxHeatingTimeInSeconds = heatingTimeInSec;
                ItemName = itemName;
           }
      }

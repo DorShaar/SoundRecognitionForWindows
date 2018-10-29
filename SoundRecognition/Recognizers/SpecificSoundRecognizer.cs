@@ -14,13 +14,14 @@ namespace SoundRecognition
           private readonly double mSecondsToAnalyzeAudioFiles = 10;
           private readonly string mRecordsDirectory;
 
+          private bool mIsStopped = false;
+          private bool mShouldStop = false;
           private Recorder mRecorder;
           private Queue<IAudioFile> mSubSoundsQueue = new Queue<IAudioFile>();
-          private bool mShouldStop = false;
           private SoundFingerprintingWrapper mSoundFingerprintingUtility;
           private readonly Logger mLogger;
 
-          private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(false);
+          private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(true);
           public event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
 
           public SpecificSoundRecognizer(string workingDirectory, int amplification, int SecondsToAnalyzeAudioFiles)
@@ -41,6 +42,7 @@ namespace SoundRecognition
 
           public void ProcessNewData(IItemInfo item)
           {
+               mRecognizerFinishedEvent.Reset();
                using (IntervalsRecorderStrategy intervalsRecorder = new IntervalsRecorderStrategy())
                using (mRecorder = new Recorder(mRecordsDirectory, intervalsRecorder))
                using (FileSystemWatcher fileSystemWatcher = new FileSystemWatcher())
@@ -73,11 +75,15 @@ namespace SoundRecognition
 
           public void Stop(string stopReason)
           {
-               mShouldStop = true;
+               if(!mIsStopped)
+               {
+                    mShouldStop = true;
 
-               // Waiting for ProcessNewData to finish.
-               mRecognizerFinishedEvent.WaitOne();
-               mLogger.WriteLine($"{nameof(SpecificSoundRecognizer)} stopped. Stop Reason: {stopReason}");
+                    // Waiting for ProcessNewData to finish.
+                    mRecognizerFinishedEvent.WaitOne();
+                    mIsStopped = true;
+                    mLogger.WriteLine($"{nameof(SpecificSoundRecognizer)} stopped. Stop Reason: {stopReason}");
+               }
           }
 
           private void FileSystemWatcher_Renamed(object sender, RenamedEventArgs e)

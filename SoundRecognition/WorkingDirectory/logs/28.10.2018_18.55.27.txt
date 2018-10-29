@@ -1,0 +1,32 @@
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Recognizer machine turned off
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Pop detected after: 42638
+Pop detected after: 43327
+Pop detected after: 46086
+Pop detected after: 47005
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: F:\שולחן העבודה\tomer\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 52233
+Pop detected after: 63608
+Pop detected after: 64577
+Pop detected after: 65654
+Pop detected after: 67201
+Pop detected after: 70421
+Pop detected after: 79624
+Pop detected after: 79844
+Pop detected after: 81236
+Pop detected after: 84056
+Pop detected after: 84394

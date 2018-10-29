@@ -32,12 +32,11 @@
                this.WorkingDirectoryTextBox = new System.Windows.Forms.TextBox();
                this.DBLabel = new System.Windows.Forms.Label();
                this.SetWorkingDirectoryButton = new System.Windows.Forms.Button();
-               this.LogRichTextBox = new System.Windows.Forms.RichTextBox();
-               this.OutputLabel = new System.Windows.Forms.Label();
                this.ScanItemButton = new System.Windows.Forms.Button();
                this.StartMachineButton = new System.Windows.Forms.Button();
                this.CurrentItemLabel = new System.Windows.Forms.Label();
                this.CurrentItemNameLabel = new System.Windows.Forms.Label();
+               this.mFFTVisual = new SoundRecognition.SoundVisualizationUserControl();
                this.SuspendLayout();
                // 
                // TurnOnOffButton
@@ -52,15 +51,15 @@
                // 
                // WorkingDirectoryTextBox
                // 
-               this.WorkingDirectoryTextBox.Location = new System.Drawing.Point(203, 21);
+               this.WorkingDirectoryTextBox.Location = new System.Drawing.Point(202, 22);
                this.WorkingDirectoryTextBox.Name = "WorkingDirectoryTextBox";
-               this.WorkingDirectoryTextBox.Size = new System.Drawing.Size(903, 26);
+               this.WorkingDirectoryTextBox.Size = new System.Drawing.Size(902, 26);
                this.WorkingDirectoryTextBox.TabIndex = 1;
                // 
                // DBLabel
                // 
                this.DBLabel.AutoSize = true;
-               this.DBLabel.Location = new System.Drawing.Point(45, 21);
+               this.DBLabel.Location = new System.Drawing.Point(45, 22);
                this.DBLabel.Name = "DBLabel";
                this.DBLabel.Size = new System.Drawing.Size(138, 20);
                this.DBLabel.TabIndex = 2;
@@ -68,30 +67,13 @@
                // 
                // SetWorkingDirectoryButton
                // 
-               this.SetWorkingDirectoryButton.Location = new System.Drawing.Point(1126, 21);
+               this.SetWorkingDirectoryButton.Location = new System.Drawing.Point(1126, 22);
                this.SetWorkingDirectoryButton.Name = "SetWorkingDirectoryButton";
-               this.SetWorkingDirectoryButton.Size = new System.Drawing.Size(81, 39);
+               this.SetWorkingDirectoryButton.Size = new System.Drawing.Size(81, 38);
                this.SetWorkingDirectoryButton.TabIndex = 3;
                this.SetWorkingDirectoryButton.Text = "Change";
                this.SetWorkingDirectoryButton.UseVisualStyleBackColor = true;
                this.SetWorkingDirectoryButton.Click += new System.EventHandler(this.SetWorkingDirectoryButton_Click);
-               // 
-               // LogRichTextBox
-               // 
-               this.LogRichTextBox.Location = new System.Drawing.Point(55, 174);
-               this.LogRichTextBox.Name = "LogRichTextBox";
-               this.LogRichTextBox.Size = new System.Drawing.Size(1106, 301);
-               this.LogRichTextBox.TabIndex = 4;
-               this.LogRichTextBox.Text = "";
-               // 
-               // OutputLabel
-               // 
-               this.OutputLabel.AutoSize = true;
-               this.OutputLabel.Location = new System.Drawing.Point(51, 151);
-               this.OutputLabel.Name = "OutputLabel";
-               this.OutputLabel.Size = new System.Drawing.Size(62, 20);
-               this.OutputLabel.TabIndex = 2;
-               this.OutputLabel.Text = "Output:";
                // 
                // ScanItemButton
                // 
@@ -106,7 +88,7 @@
                // 
                // StartMachineButton
                // 
-               this.StartMachineButton.Location = new System.Drawing.Point(689, 82);
+               this.StartMachineButton.Location = new System.Drawing.Point(688, 82);
                this.StartMachineButton.Name = "StartMachineButton";
                this.StartMachineButton.Size = new System.Drawing.Size(156, 45);
                this.StartMachineButton.TabIndex = 0;
@@ -118,7 +100,7 @@
                // CurrentItemLabel
                // 
                this.CurrentItemLabel.AutoSize = true;
-               this.CurrentItemLabel.Location = new System.Drawing.Point(863, 94);
+               this.CurrentItemLabel.Location = new System.Drawing.Point(862, 94);
                this.CurrentItemLabel.Name = "CurrentItemLabel";
                this.CurrentItemLabel.Size = new System.Drawing.Size(102, 20);
                this.CurrentItemLabel.TabIndex = 2;
@@ -127,20 +109,27 @@
                // CurrentItemNameLabel
                // 
                this.CurrentItemNameLabel.AutoSize = true;
-               this.CurrentItemNameLabel.Location = new System.Drawing.Point(971, 94);
+               this.CurrentItemNameLabel.Location = new System.Drawing.Point(970, 94);
                this.CurrentItemNameLabel.Name = "CurrentItemNameLabel";
                this.CurrentItemNameLabel.Size = new System.Drawing.Size(47, 20);
                this.CurrentItemNameLabel.TabIndex = 2;
                this.CurrentItemNameLabel.Text = "None";
                // 
+               // mFFTVisual
+               // 
+               this.mFFTVisual.Location = new System.Drawing.Point(-3, 162);
+               this.mFFTVisual.Name = "mFFTVisual";
+               this.mFFTVisual.Size = new System.Drawing.Size(1210, 356);
+               this.mFFTVisual.TabIndex = 6;
+               // 
                // MachineUI
                // 
+               this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
                this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-               this.ClientSize = new System.Drawing.Size(1219, 502);
-               this.Controls.Add(this.LogRichTextBox);
+               this.ClientSize = new System.Drawing.Size(1220, 513);
+               this.Controls.Add(this.mFFTVisual);
                this.Controls.Add(this.SetWorkingDirectoryButton);
-               this.Controls.Add(this.OutputLabel);
                this.Controls.Add(this.CurrentItemNameLabel);
                this.Controls.Add(this.CurrentItemLabel);
                this.Controls.Add(this.DBLabel);
@@ -154,6 +143,7 @@
                this.ShowIcon = false;
                this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
                this.Text = "MachineUI";
+               this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MachineUI_FormClosed);
                this.ResumeLayout(false);
                this.PerformLayout();
 
@@ -165,11 +155,10 @@
           private System.Windows.Forms.TextBox WorkingDirectoryTextBox;
           private System.Windows.Forms.Label DBLabel;
           private System.Windows.Forms.Button SetWorkingDirectoryButton;
-          private System.Windows.Forms.RichTextBox LogRichTextBox;
-          private System.Windows.Forms.Label OutputLabel;
           private System.Windows.Forms.Button ScanItemButton;
           private System.Windows.Forms.Button StartMachineButton;
           private System.Windows.Forms.Label CurrentItemLabel;
           private System.Windows.Forms.Label CurrentItemNameLabel;
+          private SoundVisualizationUserControl mFFTVisual;
      }
 }

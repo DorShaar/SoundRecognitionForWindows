@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScottPlot
+namespace SoundRecognition
 {
      /// <summary>
      /// The MouseAxis class simplifies adjusting axis edges for click-and-drag pan and zoom events.
@@ -15,8 +15,8 @@ namespace ScottPlot
 
           public MouseAxis(Axis xAxis, Axis yAxis, int mouseX, int mouseY)
           {
-               xAxStart = new ScottPlot.Axis(xAxis.Min, xAxis.Max, xAxis.PXSize, xAxis.IsInverted);
-               yAxStart = new ScottPlot.Axis(yAxis.Min, yAxis.Max, yAxis.PXSize, yAxis.IsInverted);
+               xAxStart = new Axis(xAxis.Min, xAxis.Max, xAxis.PXSize, xAxis.IsInverted);
+               yAxStart = new Axis(yAxis.Min, yAxis.Max, yAxis.PXSize, yAxis.IsInverted);
                xMouseStart = mouseX;
                yMouseStart = mouseY;
                Pan(0, 0);

@@ -1,0 +1,25 @@
+Database loaded from C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
+Database loaded from C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
+Recognizer machine turned on
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Recognizer machine started
+Recognizer machine start working...
+Start processing new data
+Creating directory: C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory\RecordsData
+Recording...
+Pop detected after: 42019
+Pop detected after: 42199
+Pop detected after: 42300
+Pop detected after: 42522
+Pop detected after: 42785
+Pop detected after: 43978
+Pop detected after: 44144
+Pop detected after: 44891
+Pop detected after: 47468
+Pop detected after: 50326
+Pop detected after: 51627
+Pop detected after: 54208

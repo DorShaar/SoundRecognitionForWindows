@@ -53,7 +53,6 @@ namespace SoundRecognition
                string recognizerType = "UnkownRecognizer";
                ItemRecognizeData recognizerData = null;
 
-               // TODO improve not efficient.
                foreach(KeyValuePair<IItemInfo, ItemRecognizeData> keyValue in mItemToRecognizerTypeDictionary)
                {
                     if(keyValue.Key.Barcode == item.Barcode)
@@ -75,7 +74,6 @@ namespace SoundRecognition
                string category = "Unclassified";
                ItemRecognizeData recognizerData = null;
 
-               // TODO improve not efficient.
                foreach (KeyValuePair<IItemInfo, ItemRecognizeData> keyValue in mItemToRecognizerTypeDictionary)
                {
                     if (keyValue.Key.Barcode == item.Barcode)

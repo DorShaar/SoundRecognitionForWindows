@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Diagnostics;
 
-namespace ScottPlot
+namespace SoundRecognition
 {
      public class DataGen
      {

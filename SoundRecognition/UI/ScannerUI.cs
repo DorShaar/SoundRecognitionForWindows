@@ -7,7 +7,7 @@ namespace SoundRecognition
      {
           private int mDisplayedImageIndex = 0;
           public event AddNewItem OnAddNewBarcode;
-          public event ScanExistingItem OnScanBarcode;
+          public event ScanExistingItem OnScanExistingBarcode;
 
           public ScannerUI()
           {
@@ -30,21 +30,49 @@ namespace SoundRecognition
                using (ScannerUserInput scannerUserInputDialog = new ScannerUserInput())
                {
                     scannerUserInputDialog.ShowDialog();
+                    if (!IsValidInput(scannerUserInputDialog))
+                         return;
+
                     string newBarcodeImagePath = OnAddNewBarcode.Invoke(
                          scannerUserInputDialog.NewProductName,
-                         scannerUserInputDialog.MaximalHittingTimeInSec,
+                         scannerUserInputDialog.MaximalHeatingTimeInSec,
                          scannerUserInputDialog.RecognitionType,
                          scannerUserInputDialog.Category);
 
                     ImageList.Images.Add(
                          scannerUserInputDialog.NewProductName,
                          new Bitmap(newBarcodeImagePath));
+
+                    mDisplayedImageIndex = ImageList.Images.Count - 1;
+                    ShowCurrentPicture();
+                    OnScanExistingBarcode?.Invoke(BarcodeNameLable.Text);
+                    Close();
                }
           }
 
-          private void ScanBarcodeButton_Click(object sender, System.EventArgs e)
+          private bool IsValidInput(ScannerUserInput scannerUserInputDialog)
           {
-               OnScanBarcode?.Invoke(BarcodeNameLable.Text);
+               bool isValidInput = true;
+
+               if (isEmptyInput(scannerUserInputDialog.NewProductName) ||
+                    isEmptyInput(scannerUserInputDialog.MaximalHeatingTimeInSec.ToString()) ||
+                    isEmptyInput(scannerUserInputDialog.RecognitionType) ||
+                    isEmptyInput(scannerUserInputDialog.Category))
+               {
+                    isValidInput = false;
+               }
+
+               return isValidInput;
+          }
+
+          private bool isEmptyInput(string inputString)
+          {
+               return inputString == null || inputString.Trim().Equals(string.Empty);
+          }
+
+          private void ScanExistingBarcodeButton_Click(object sender, System.EventArgs e)
+          {
+               OnScanExistingBarcode?.Invoke(BarcodeNameLable.Text);
                Close();
           }
 
