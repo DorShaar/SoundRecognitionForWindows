@@ -11,16 +11,17 @@ namespace SoundRecognition
           public static readonly int MaximalWorkingTimeInMS = 300 * MS_IN_ONE_SECOND; // 5 minutes.
 
           private Logger mLogger;
+          private MachineStatus mStatus = MachineStatus.TurnedOff;
+          public string WorkingDirectoryPath { get; private set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
           public IRecognizerMachine Recognizer { get; private set; }
           public IItemInfo ItemInfo { get; set; } = null;
           public ItemScanner Scanner { get; private set; }
 
-          public string WorkingDirectoryPath = @"C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory"; // TODO change to documents
-          public MachineStatus Status { get; private set; } = MachineStatus.TurnedOff;
-
           public event MachineShouldFinish OnMachineShouldFinish;
           public event MachineSetItemInfo OnMachineTurnOff;
+          public event MachineSendInfoMsg OnMachineFailedToStart;
+          public event MachineSendInfoMsg OnMachineFinishedWithResult;
 
           internal enum MachineStatus
           {
@@ -41,42 +42,9 @@ namespace SoundRecognition
 
           public void TurnOn()
           {
-               Scanner = new ItemScanner(WorkingDirectoryPath);
-
-               Status = MachineStatus.OnAndNotWorking;
+               mStatus = MachineStatus.OnAndNotWorking;
                mLogger.WriteLine("Recognizer machine turned on");
-          }
-
-          public void Run()
-          {
-               while (Status != MachineStatus.TurnedOff)
-               {
-                    ShowManu();
-                    PrintCurrentItem();
-
-                    string userInput = Console.ReadLine();
-                    switch (userInput.ToLowerInvariant())
-                    {
-                         case "scan":
-                         case "1":
-                              ScanItem();
-                              break;
-                         case "start":
-                         case "2":
-                              StartWorking();
-                              break;
-                         case "turn off":
-                         case "turn-off":
-                         case "off":
-                         case "exit":
-                         case "3":
-                              TurnOff();
-                              break;
-                         default:
-                              mLogger.WriteLine("Invalid input" + Environment.NewLine);
-                              break;
-                    }
-               }
+               Scanner = new ItemScanner(WorkingDirectoryPath);
           }
 
           public void ScanItem()
@@ -112,17 +80,21 @@ namespace SoundRecognition
           {
                if (ItemInfo == null)
                {
-                    mLogger.WriteLine($"{nameof(ItemInfo)} is unknown, machine will not start");
+                    string errorMsg = $"{nameof(ItemInfo)} is unknown, machine will not start";
+                    mLogger.WriteLine(errorMsg);
+                    OnMachineFailedToStart?.Invoke(errorMsg);
                     return;
                }
 
                if (Recognizer == null)
                {
-                    mLogger.WriteLine($"{nameof(Recognizer)} is unknown, machine will not start");
+                    string errorMsg = $"{nameof(Recognizer)} is unknown, machine will not start";
+                    mLogger.WriteLine(errorMsg);
+                    OnMachineFailedToStart?.Invoke(errorMsg);
                     return;
                }
 
-               Status = MachineStatus.OnAndWorking;
+               mStatus = MachineStatus.OnAndWorking;
                mLogger.WriteLine("Recognizer machine started");
 
                int maxHeatingTimeAllowedInMS = Math.Min(
@@ -135,7 +107,7 @@ namespace SoundRecognition
 
                new Thread(() => Recognizer.ProcessNewData(ItemInfo)).Start();
 
-               while (Status != MachineStatus.OnAndShouldStop)
+               while (mStatus != MachineStatus.OnAndShouldStop)
                {
                     // Checks if the machine reaches timeout.
                     if (stopwatch.ElapsedMilliseconds >= maxHeatingTimeAllowedInMS)
@@ -147,20 +119,32 @@ namespace SoundRecognition
                }
 
                stopwatch.Stop();
+               OnMachineFinishedWithResult?.Invoke(Recognizer.RecognitionStatus.ToString());
                StopMachine();
           }
 
           public void TurnOff()
           {
-               if (Status != MachineStatus.TurnedOff)
+               if (mStatus != MachineStatus.TurnedOff)
                {
-                    Recognizer?.Stop($"{nameof(Machine)} requested tp be turned off");
+                    Recognizer?.Stop($"{nameof(Machine)} requested to be turned off");
                     OnMachineShouldFinish.Invoke();
                     ClearItemInfo();
-                    Status = MachineStatus.TurnedOff;
+                    mStatus = MachineStatus.TurnedOff;
                     OnMachineTurnOff?.Invoke(null);
                     mLogger.WriteLine("Recognizer machine turned off");
                }
+          }
+
+          /// <summary>
+          /// That property setting is in method since we want to make sure all the paths
+          /// of the machine components are updated also.
+          /// </summary>
+          /// <param name="newPath"></param>
+          public void SetWorkingDirectoryPath(string newPath)
+          {
+               WorkingDirectoryPath = newPath;
+               Scanner?.SetWorkingDirectoryPath(newPath);
           }
 
           private void ShowManu()
@@ -188,13 +172,14 @@ namespace SoundRecognition
 
           private void SetShouldStopStatus(object sender, RecognizerFinishedEventArgs eventArgs)
           {
-               Status = MachineStatus.OnAndShouldStop;
+               mStatus = MachineStatus.OnAndShouldStop;
+               OnMachineShouldFinish.Invoke();
           }
 
           private void StopMachine()
           {
                ClearItemInfo();
-               Status = MachineStatus.OnAndNotWorking;
+               mStatus = MachineStatus.OnAndNotWorking;
                mLogger.WriteLine("Machine stopped");
           }
 
@@ -204,6 +189,38 @@ namespace SoundRecognition
           }
 
           // Obsolete methods.
+
+          public void Run_obsolete()
+          {
+               while (mStatus != MachineStatus.TurnedOff)
+               {
+                    ShowManu();
+                    PrintCurrentItem();
+
+                    string userInput = Console.ReadLine();
+                    switch (userInput.ToLowerInvariant())
+                    {
+                         case "scan":
+                         case "1":
+                              ScanItem();
+                              break;
+                         case "start":
+                         case "2":
+                              StartWorking();
+                              break;
+                         case "turn off":
+                         case "turn-off":
+                         case "off":
+                         case "exit":
+                         case "3":
+                              TurnOff();
+                              break;
+                         default:
+                              mLogger.WriteLine("Invalid input" + Environment.NewLine);
+                              break;
+                    }
+               }
+          }
 
           private void AskConfigureDatabase_obsolete()
           {

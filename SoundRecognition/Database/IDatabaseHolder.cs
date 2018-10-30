@@ -3,7 +3,7 @@ namespace SoundRecognition
 {
     interface IDatabaseHolder
     {
-          void LoadDatabases();
-          void SaveDatabases();
+        void LoadDatabases();
+        void SaveDatabases();
     }
 }

@@ -15,13 +15,14 @@ namespace SoundRecognition
      /// </summary>
      internal class PopsRecognizer : IRecognizerMachine
      {
+          // Constants.
           private static readonly int MS_IN_ONE_SECOND = 1000;
           private readonly int MAXIMAL_POP_INTERVAL_ALLOWED_IN_MS = 4 * MS_IN_ONE_SECOND;
           private readonly string RECORDS_DIRECTORY_NAME = "RecordsData";
           private readonly int mSampleRate = 44100;
 
           // Knn parameters.
-          private readonly int KNN_PARAMETER = 5; // TODO: choose the k parameter. SO 5 is good?
+          private readonly int KNN_PARAMETER = 5; // The k parameter for the KNN test.
           private readonly string classificationA = "popcornDone";
           private readonly string classificationB = "underCooked";
           private KnnTester mKnnTester;
@@ -38,16 +39,11 @@ namespace SoundRecognition
           private List<double> mEnergyForBlocksList = new List<double>();
           private RecordInfoDescriptor mRecordInfoDescriptor = new RecordInfoDescriptor();
 
+          public string RecognitionStatus { get; private set; } = "Not recognized yet";
+
           private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(true);
           public event SendProcessLatestData OnSendProcessLatestData;
           public event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
-
-          private enum ePopState
-          {
-               Unkown,
-               BeforePeak,
-               AfterPeak,
-          }
 
           public PopsRecognizer(string workingDirectory)
           {
@@ -82,8 +78,7 @@ namespace SoundRecognition
 
                     // Letting the recorder sending new data until recognizer is signled to stop.
                     while (!mShouldStop) { };
-                    mStopwatch.Stop();  
-                    mRecordInfoDescriptor.Save(mRecordsDataDirectoryPath);
+                    mStopwatch.Stop();
                }
 
                mLogger.WriteLine("Stopped processing new data");
@@ -92,7 +87,8 @@ namespace SoundRecognition
 
           public void Stop(string stopReason)
           {
-               if(!mIsStopped)
+               RecognitionStatus = stopReason;
+               if (!mIsStopped)
                {
                     mShouldStop = true;
 
@@ -147,56 +143,16 @@ namespace SoundRecognition
                // Keeps the real half (the other half imaginary)
                Array.Copy(fft, fftReal, fftReal.Length);
 
-               System.Drawing.Color graphColor = System.Drawing.Color.Blue;
+               System.Drawing.Color graphColor = System.Drawing.Color.CadetBlue;
                if (Recognize(fftReal) == eRecognitionStatus.Recognized)
                {
                     mLogger.WriteLine($"Pop detected after: {mStopwatch.ElapsedMilliseconds}");
-                    graphColor = System.Drawing.Color.Red;
+                    graphColor = System.Drawing.Color.Green;
                }
 
                // Sends data to draw on UI.
                OnSendProcessLatestData.Invoke(new SoundVisualizationDataPackage(
                     pcm, pcmPointSpacingMs, fftReal, fftPointSpacingHz, graphColor));
-          }
-
-          private void ProcessLatestData_working(Object sender, RecorderUpdateEventArgs e) // ORG: PlotLatestData()
-          {
-               if (e.AudioBytes.Length == 0)
-                    return;
-               if (e.AudioBytes[(mRecorder.RecordStrategy as RegularRecordStrategy).BufferSize - 2] == 0)
-                    return;
-
-               // Incoming data is 16-bit (2 bytes per audio point).
-               int bytesPerPoint = 2;
-
-               // Creates (32-bit) int array ready to fill with the 16-bit data.
-               int graphPointCount = e.AudioBytes.Length / bytesPerPoint;
-
-               // Create double arrays to hold the data we will graph.
-               double[] pcm = new double[graphPointCount];
-               double[] fft = new double[graphPointCount];
-               double[] fftReal = new double[graphPointCount / 2];
-
-               // Populate Xs and Ys with double data.
-               for (int i = 0; i < graphPointCount; ++i)
-               {
-                    // Reads the int16 from the two bytes.
-                    Int16 val = BitConverter.ToInt16(e.AudioBytes, i * 2);
-
-                    // Stores the value in Ys as a percent (+/- 100% = 200%).
-                    pcm[i] = (double)(val) / Math.Pow(2, 16) * 200.0;
-               }
-
-               // Calculate the full FFT.
-               fft = FFT(pcm);
-
-               // Keeps the real half (the other half imaginary)
-               Array.Copy(fft, fftReal, fftReal.Length);
-
-               if (Recognize(fftReal) == eRecognitionStatus.Recognized)
-               {
-                    mLogger.WriteLine($"Pop detected after: {mStopwatch.ElapsedMilliseconds}");
-               }
           }
 
           private double[] FFT(double[] data)

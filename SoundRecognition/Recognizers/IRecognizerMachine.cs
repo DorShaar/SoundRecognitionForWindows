@@ -4,6 +4,7 @@ namespace SoundRecognition
 {
      interface IRecognizerMachine
      {
+          string RecognitionStatus { get; }
           event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
           void LoadProcessedData(string recognizerType, string itemCategory);
           void ProcessNewData(IItemInfo item);

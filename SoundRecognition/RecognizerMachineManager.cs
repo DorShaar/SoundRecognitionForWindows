@@ -11,11 +11,13 @@ namespace SoundRecognition
      public delegate void StartMachine();
      public delegate void UpdateWorkingDirectory(string newPath);
 
+
      public delegate string AddNewItem(string newItem, int maxHeatingTimeInSec, string recognitionType, string category);
      public delegate void ScanExistingItem(string imagePath);
 
      public delegate void MachineShouldFinish();
      public delegate void MachineSetItemInfo(IItemInfo itemInfo);
+     public delegate void MachineSendInfoMsg(string errorMsg);
 
      public delegate void SendProcessLatestData(SoundVisualizationDataPackage package);
 
@@ -31,6 +33,7 @@ namespace SoundRecognition
           public RecognizerMachineManager()
           {
                Initialize();
+               mMachineUI.SetWorkingDirectoryTextBox(mMachine.WorkingDirectoryPath);
           }
 
           public void Run()
@@ -43,8 +46,6 @@ namespace SoundRecognition
                InitializeMachine();
                InitializeMachineUI();
                InitializeScannerUI();
-
-               mMachine.OnMachineShouldFinish += DisableSoundsVisualizationForm;
           }
 
           // Machine Methods.
@@ -52,6 +53,9 @@ namespace SoundRecognition
           private void InitializeMachine()
           {
                mMachine.OnMachineTurnOff += mMachineUI.UpdateMachineItemName;
+               mMachine.OnMachineFailedToStart += ShowResultMsgBox;
+               mMachine.OnMachineShouldFinish += DisableSoundsVisualizationForm;
+               mMachine.OnMachineFinishedWithResult += ShowResultMsgBox;
           }
 
           private void InitializeMachineUI()
@@ -78,7 +82,7 @@ namespace SoundRecognition
 
           private void UpdateWorkingDirectory(string newPath)
           {
-               mMachine.WorkingDirectoryPath = newPath;
+               mMachine.SetWorkingDirectoryPath(newPath);
           }
 
           private void ScanItem()
@@ -97,16 +101,12 @@ namespace SoundRecognition
                }
 
                mMachine.StartWorking();
+               mMachineUI.ClearFFTVisualGraph();
           }
 
-          private void OpenForm<T>(T form) where T : Form
+          private void ShowResultMsgBox(string msgToShow)
           {
-               if (form.IsDisposed)
-               {
-                    form = Activator.CreateInstance<T>();
-               }
-
-               Application.Run(form);
+               MessageBox.Show(msgToShow);
           }
 
           // Scanner Methods.

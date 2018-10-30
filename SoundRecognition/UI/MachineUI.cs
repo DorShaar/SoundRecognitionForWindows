@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -20,10 +19,6 @@ namespace SoundRecognition
           public MachineUI()
           {
                InitializeComponent();
-
-               WorkingDirectoryTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-               WorkingDirectoryTextBox.Text = @"C:\Users\Dor Shaar\Desktop\SoundRecognitionForWindows-master\SoundRecognition\WorkingDirectory"; // TODO delete.
-
                SetupGraphLabels();
           }
 
@@ -35,10 +30,15 @@ namespace SoundRecognition
 
           public void UpdateMachineItemName(IItemInfo itemInfo)
           {
-               if(itemInfo == null)
+               if (itemInfo == null)
                     ThreadHelper.SetText(this, CurrentItemNameLabel, "None");
                else
                     ThreadHelper.SetText(this, CurrentItemNameLabel, itemInfo.ItemName);
+          }
+
+          public void SetWorkingDirectoryTextBox(string path)
+          {
+               WorkingDirectoryTextBox.Text = path;
           }
 
           private void TurnOnButton_Click(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace SoundRecognition
                mFFTVisual.Clear();
                mFFTVisual.PlotSignal(
                     dataToDraw.FFTReal, dataToDraw.FFTPointSpacingHz, dataToDraw.FFTDrawColor);
-               mFFTVisual.PlotSignal(new double[5], 5);
+               //mFFTVisual.PlotSignal(new double[5], 5); //TODO: what this is for? this is where the 5 red points are printed
 
                // Optionally adjust the scale to automatically fit the data.
                if (mIsNeedsAutoScaling)
@@ -109,8 +109,13 @@ namespace SoundRecognition
 
           public void SetSoundVisulalization(bool isEnabled)
           {
+               ClearFFTVisualGraph();
+               ThreadHelper.SetEnabledProperty(this, mFFTVisual, isEnabled);
+          }
+
+          public void ClearFFTVisualGraph()
+          {
                mFFTVisual.Clear(true);
-               ThreadHelper.SetEnabledProperty(this, mFFTVisual ,isEnabled);
           }
 
           private void AutoScaleToolStripMenuItem_Click(object sender, EventArgs e)

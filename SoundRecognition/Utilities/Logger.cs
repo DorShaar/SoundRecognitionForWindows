@@ -3,114 +3,114 @@ using System.IO;
 
 namespace SoundRecognition
 {
-     internal class Logger
-     {
-          private readonly string LOG_TEXT_EXTENSION = ".txt";
-          private readonly string LOG_DIRECTORY_NAME = "logs";
-          
-          private string mWriterName;
-          private ConsoleColor mConsoleColor;
+    internal class Logger
+    {
+        private readonly string LOG_TEXT_EXTENSION = ".txt";
+        private readonly string LOG_DIRECTORY_NAME = "logs";
 
-          private static string mLogsDirectory;
-          private static object mLocker = new Object();
-          private static string mLogTextFilePath;
-          private static bool mIsAlreadyCreated = false;
+        private string mWriterName;
+        private ConsoleColor mConsoleColor;
 
-          public static event LogMsg OnLogMsg;
+        private static string mLogsDirectory;
+        private static object mLocker = new Object();
+        private static string mLogTextFilePath;
+        private static bool mIsAlreadyCreated = false;
 
-          /// <summary>
-          /// Logger will log in one text file all the operation of the application.
-          /// </summary>
-          /// <param name="workingDirectory"></param>
-          /// <param name="writerName"></param>
-          /// <param name="consoleColor"></param>
-          public Logger(string workingDirectory, string writerName, ConsoleColor consoleColor)
-          {
-               if(!mIsAlreadyCreated)
-               {
-                    mLogsDirectory = Path.Combine(workingDirectory, LOG_DIRECTORY_NAME);
-                    Directory.CreateDirectory(mLogsDirectory);
+        public static event LogMsg OnLogMsg;
 
-                    string timePrefix = GetTimePrefix();
-                    mLogTextFilePath = Path.Combine(mLogsDirectory, $"{timePrefix}{LOG_TEXT_EXTENSION}");
-               }
+        /// <summary>
+        /// Logger will log in one text file all the operation of the application.
+        /// </summary>
+        /// <param name="workingDirectory"></param>
+        /// <param name="writerName"></param>
+        /// <param name="consoleColor"></param>
+        public Logger(string workingDirectory, string writerName, ConsoleColor consoleColor)
+        {
+            if (!mIsAlreadyCreated)
+            {
+                mLogsDirectory = Path.Combine(workingDirectory, LOG_DIRECTORY_NAME);
+                Directory.CreateDirectory(mLogsDirectory);
 
-               mWriterName = writerName;
-               mConsoleColor = consoleColor;
+                string timePrefix = GetTimePrefix();
+                mLogTextFilePath = Path.Combine(mLogsDirectory, $"{timePrefix}{LOG_TEXT_EXTENSION}");
+            }
 
-               mIsAlreadyCreated = true;
-          }
+            mWriterName = writerName;
+            mConsoleColor = consoleColor;
 
-          public Logger(string writerName, ConsoleColor consoleColor)
-          {
-               if (!mIsAlreadyCreated)
-               {
-                    throw new InvalidOperationException($"Should call {nameof(Logger)} with {nameof(mLogsDirectory)}");
-               }
+            mIsAlreadyCreated = true;
+        }
 
-               mWriterName = writerName;
-               mConsoleColor = consoleColor;
-          }
+        public Logger(string writerName, ConsoleColor consoleColor)
+        {
+            if (!mIsAlreadyCreated)
+            {
+                throw new InvalidOperationException($"Should call {nameof(Logger)} with {nameof(mLogsDirectory)}");
+            }
 
-          public void WriteLine(string textToLog)
-          {
-               lock (mLocker)
-               {
-                    using (StreamWriter streamWriter = new StreamWriter(mLogTextFilePath, true))
-                    {
-                         streamWriter.WriteLine(textToLog);
-                    }
+            mWriterName = writerName;
+            mConsoleColor = consoleColor;
+        }
 
-                    Print(textToLog, mConsoleColor);
-               }
-          }
+        public void WriteLine(string textToLog)
+        {
+            lock (mLocker)
+            {
+                using (StreamWriter streamWriter = new StreamWriter(mLogTextFilePath, true))
+                {
+                    streamWriter.WriteLine(textToLog);
+                }
 
-          public void WriteError(string textToLog)
-          {
-               lock (mLocker)
-               {
-                    using (StreamWriter streamWriter = new StreamWriter(mLogTextFilePath, true))
-                    {
-                         streamWriter.WriteLine("Error!");
-                         streamWriter.WriteLine(textToLog);
-                    }
+                Print(textToLog, mConsoleColor);
+            }
+        }
 
-                    Print(textToLog, ConsoleColor.Red);
-               }
-          }
+        public void WriteError(string textToLog)
+        {
+            lock (mLocker)
+            {
+                using (StreamWriter streamWriter = new StreamWriter(mLogTextFilePath, true))
+                {
+                    streamWriter.WriteLine("Error!");
+                    streamWriter.WriteLine(textToLog);
+                }
 
-          public void WriteError(string textToLog, Exception exception)
-          {
-               lock (mLocker)
-               {
-                    using (StreamWriter streamWriter = new StreamWriter(mLogTextFilePath, true))
-                    {
-                         streamWriter.WriteLine(textToLog);
-                         streamWriter.WriteLine(exception.ToString());
-                    }
+                Print(textToLog, ConsoleColor.Red);
+            }
+        }
 
-                    Print(textToLog, ConsoleColor.Red);
-                    Print(exception.Message, ConsoleColor.Red);
-               }
-          }
+        public void WriteError(string textToLog, Exception exception)
+        {
+            lock (mLocker)
+            {
+                using (StreamWriter streamWriter = new StreamWriter(mLogTextFilePath, true))
+                {
+                    streamWriter.WriteLine(textToLog);
+                    streamWriter.WriteLine(exception.ToString());
+                }
 
-          private void Print(string textToLog, ConsoleColor consoleColor)
-          {
-               OnLogMsg?.Invoke($"{mWriterName}: {textToLog}", consoleColor);
-               PrintToConsole_obsolete(textToLog, consoleColor);
-          }
+                Print(textToLog, ConsoleColor.Red);
+                Print(exception.Message, ConsoleColor.Red);
+            }
+        }
 
-          private void PrintToConsole_obsolete(string textToLog, ConsoleColor consoleColor)
-          {
-               Console.ForegroundColor = consoleColor;
-               Console.WriteLine($"{mWriterName}: {textToLog}");
-               Console.ResetColor();
-          }
+        private void Print(string textToLog, ConsoleColor consoleColor)
+        {
+            OnLogMsg?.Invoke($"{mWriterName}: {textToLog}", consoleColor);
+            PrintToConsole_obsolete(textToLog, consoleColor);
+        }
 
-          private string GetTimePrefix()
-          {
-               DateTime dateTime = DateTime.Now;
-               return $"{dateTime.Day}.{dateTime.Month}.{dateTime.Year}_{dateTime.Hour}.{dateTime.Minute}.{dateTime.Second}";
-          }
-     }
+        private void PrintToConsole_obsolete(string textToLog, ConsoleColor consoleColor)
+        {
+            Console.ForegroundColor = consoleColor;
+            Console.WriteLine($"{mWriterName}: {textToLog}");
+            Console.ResetColor();
+        }
+
+        private string GetTimePrefix()
+        {
+            DateTime dateTime = DateTime.Now;
+            return $"{dateTime.Day}.{dateTime.Month}.{dateTime.Year}_{dateTime.Hour}.{dateTime.Minute}.{dateTime.Second}";
+        }
+    }
 }

@@ -8,136 +8,136 @@ using ProtoBuf;
 
 namespace SoundRecognition
 {
-     internal static class SerializationMachine
-     {
-          private static Logger mLogger = new Logger(nameof(SerializationMachine), ConsoleColor.Cyan);
+    internal static class SerializationMachine
+    {
+        private static Logger mLogger = new Logger(nameof(SerializationMachine), ConsoleColor.Cyan);
 
-          public static T DeepClone<T>(this T i_ToClone) where T : class
-          {
-               using (Stream stream = new MemoryStream())
-               {
-                    BinaryFormatter serializer = new BinaryFormatter();
-                    serializer.Serialize(stream, i_ToClone);
-                    stream.Flush();
-                    stream.Seek(0, SeekOrigin.Begin);
-                    return serializer.Deserialize(stream) as T;
-               }
-          }
+        public static T DeepClone<T>(this T i_ToClone) where T : class
+        {
+            using (Stream stream = new MemoryStream())
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Serialize(stream, i_ToClone);
+                stream.Flush();
+                stream.Seek(0, SeekOrigin.Begin);
+                return serializer.Deserialize(stream) as T;
+            }
+        }
 
-          public static void XmlSerialize(string xmlFilePath, object objectToSerialize, Type type)
-          {
-               XmlSerializer xmlSerializer = new XmlSerializer(type);
-               using (TextWriter textWriter = new StreamWriter(xmlFilePath))
-               {
-                    xmlSerializer.Serialize(textWriter, objectToSerialize);
-               }
-          }
+        public static void XmlSerialize(string xmlFilePath, object objectToSerialize, Type type)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(type);
+            using (TextWriter textWriter = new StreamWriter(xmlFilePath))
+            {
+                xmlSerializer.Serialize(textWriter, objectToSerialize);
+            }
+        }
 
-          public static void ProtoSerialize<T>(T record, FilePath filePath) where T : class
-          {
-               if (record != null)
-               {
-                    try
-                    {
-                         using (Stream stream = new FileStream(filePath.FileFullPath,
-                              FileMode.Create, FileAccess.Write))
-                         {
-                              Serializer.Serialize(stream, record);
-                         }
-                    }
-                    catch (Exception e)
-                    {
-                         mLogger.WriteLine($"Some error occured using ProtoSerialize: {e.Message}");
-                    }
-               }
-          }
-
-          public static void ProtoSerialize<T>(T record, string filePath) where T : class
-          {
-               ProtoSerialize(record, FilePath.CreateFilePath(filePath));
-          }
-
-          public static T ProtoDeserialize<T>(FilePath filePath) where T : class
-          {
-               T objectToReturn = null;
-               try
-               {
+        public static void ProtoSerialize<T>(T record, FilePath filePath) where T : class
+        {
+            if (record != null)
+            {
+                try
+                {
                     using (Stream stream = new FileStream(filePath.FileFullPath,
-                             FileMode.Open, FileAccess.Read))
+                         FileMode.Create, FileAccess.Write))
                     {
-                         objectToReturn = Serializer.Deserialize<T>(stream);
+                        Serializer.Serialize(stream, record);
                     }
-               }
-               catch (Exception e)
-               {
-                    mLogger.WriteLine($"Some error occured using ProtoDeserialize: {e.Message}");
-               }
+                }
+                catch (Exception e)
+                {
+                    mLogger.WriteLine($"Some error occured using ProtoSerialize: {e.Message}");
+                }
+            }
+        }
 
-               return objectToReturn;
-          }
+        public static void ProtoSerialize<T>(T record, string filePath) where T : class
+        {
+            ProtoSerialize(record, FilePath.CreateFilePath(filePath));
+        }
 
-          public static void Serialize<T>(T item, string filePath) where T : class
-          {
-               Serialize(item, filePath, FileMode.Append);
-          }
+        public static T ProtoDeserialize<T>(FilePath filePath) where T : class
+        {
+            T objectToReturn = null;
+            try
+            {
+                using (Stream stream = new FileStream(filePath.FileFullPath,
+                         FileMode.Open, FileAccess.Read))
+                {
+                    objectToReturn = Serializer.Deserialize<T>(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                mLogger.WriteLine($"Some error occured using ProtoDeserialize: {e.Message}");
+            }
 
-          public static void Serialize<T>(T item, string filePath, FileMode fileMode) where T : class
-          {
-               IFormatter formatter = new BinaryFormatter();
-               using (Stream stream = new FileStream(filePath, fileMode, FileAccess.Write, FileShare.None))
-               {
-                    formatter.Serialize(stream, item);
-               }
-          }
+            return objectToReturn;
+        }
 
-          public static object Deserialize(Stream stream)
-          {
-               IFormatter formatter = new BinaryFormatter();
-               return formatter.Deserialize(stream);
-          }
+        public static void Serialize<T>(T item, string filePath) where T : class
+        {
+            Serialize(item, filePath, FileMode.Append);
+        }
 
-          /// <summary>
-          /// At first serializes the size of the dictionary and then its content.
-          /// It is very important that the serialize method from the stream will be at FileMode.Append.
-          /// </summary>
-          public static void SaveDictionaryIntoDB<T, K>(string dataBasePath, Dictionary<T, K> dictionaryToSave) where T : class where K : class
-          {
-               Serialize(dictionaryToSave.Count.ToString(), dataBasePath, FileMode.Create);
-               foreach (KeyValuePair<T, K> keyPairValue in dictionaryToSave)
-               {
-                    Serialize(keyPairValue.Key, dataBasePath);
-                    Serialize(keyPairValue.Value, dataBasePath);
-               }
+        public static void Serialize<T>(T item, string filePath, FileMode fileMode) where T : class
+        {
+            IFormatter formatter = new BinaryFormatter();
+            using (Stream stream = new FileStream(filePath, fileMode, FileAccess.Write, FileShare.None))
+            {
+                formatter.Serialize(stream, item);
+            }
+        }
 
-               mLogger.WriteLine($"Database saved to {dataBasePath}");
-          }
+        public static object Deserialize(Stream stream)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            return formatter.Deserialize(stream);
+        }
 
-          public static Dictionary<T, K> LoadDictionaryFromDB<T, K>(string databasePath)
-          {
-               Dictionary<T, K> dictionaryFromDB = new Dictionary<T, K>();
+        /// <summary>
+        /// At first serializes the size of the dictionary and then its content.
+        /// It is very important that the serialize method from the stream will be at FileMode.Append.
+        /// </summary>
+        public static void SaveDictionaryIntoDB<T, K>(string dataBasePath, Dictionary<T, K> dictionaryToSave) where T : class where K : class
+        {
+            Serialize(dictionaryToSave.Count.ToString(), dataBasePath, FileMode.Create);
+            foreach (KeyValuePair<T, K> keyPairValue in dictionaryToSave)
+            {
+                Serialize(keyPairValue.Key, dataBasePath);
+                Serialize(keyPairValue.Value, dataBasePath);
+            }
 
-               try
-               {
-                    using (Stream stream = new FileStream(databasePath, FileMode.Open, FileAccess.Read, FileShare.None))
+            mLogger.WriteLine($"Database saved to {dataBasePath}");
+        }
+
+        public static Dictionary<T, K> LoadDictionaryFromDB<T, K>(string databasePath)
+        {
+            Dictionary<T, K> dictionaryFromDB = new Dictionary<T, K>();
+
+            try
+            {
+                using (Stream stream = new FileStream(databasePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    string sizeAsString = (string)Deserialize(stream);
+                    int dictionarySize = int.Parse(sizeAsString);
+                    for (int i = 0; i < dictionarySize; ++i)
                     {
-                         string sizeAsString = (string)Deserialize(stream);
-                         int dictionarySize = int.Parse(sizeAsString);
-                         for (int i = 0; i < dictionarySize; ++i)
-                         {
-                              T t = (T)Deserialize(stream);
-                              K k = (K)Deserialize(stream);
-                              dictionaryFromDB.Add(t, k);
-                         }
+                        T t = (T)Deserialize(stream);
+                        K k = (K)Deserialize(stream);
+                        dictionaryFromDB.Add(t, k);
                     }
+                }
 
-                    mLogger.WriteLine($"Database loaded from {databasePath}");
-               }
-               catch (Exception e)
-               {
-                    mLogger.WriteLine($"Database was not loaded due to {e.Message}");
-               }
+                mLogger.WriteLine($"Database loaded from {databasePath}");
+            }
+            catch (Exception e)
+            {
+                mLogger.WriteLine($"Database was not loaded due to {e.Message}");
+            }
 
-               return dictionaryFromDB;
-          }
-     }
+            return dictionaryFromDB;
+        }
+    }
 }

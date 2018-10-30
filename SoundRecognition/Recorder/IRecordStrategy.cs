@@ -2,10 +2,10 @@
 
 namespace SoundRecognition
 {
-     internal interface IRecordStrategy: IDisposable
-     {
-          string RecordsDirectory { get; set; }
+    internal interface IRecordStrategy : IDisposable
+    {
+        string RecordsDirectory { get; set; }
 
-          void StartListeningToMicrophone(int audioDeviceNumber = 0);
-     }
+        void StartListeningToMicrophone(int audioDeviceNumber = 0);
+    }
 }

@@ -12,7 +12,7 @@ namespace SoundRecognition
         public WavFilesCreator(string workingDirectoryPath)
         {
             mOutputDirectoryPath = Path.Combine(workingDirectoryPath, RECORDS_SECTIONS_DIRECTORY_NAME);
-            mLogger = new Logger(mOutputDirectoryPath ,nameof(WavFilesCreator), ConsoleColor.DarkGray);
+            mLogger = new Logger(mOutputDirectoryPath, nameof(WavFilesCreator), ConsoleColor.DarkGray);
             Initialize();
         }
 

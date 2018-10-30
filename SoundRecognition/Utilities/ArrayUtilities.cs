@@ -8,7 +8,7 @@ namespace SoundRecognition
         {
             T[] result = new T[length];
             Array.Copy(data, index, result, 0, length);
-            if(isReverse)
+            if (isReverse)
             {
                 Array.Reverse(result);
             }

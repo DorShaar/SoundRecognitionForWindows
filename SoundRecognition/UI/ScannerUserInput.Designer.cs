@@ -33,7 +33,6 @@
             this.ProductNameTextBox = new System.Windows.Forms.TextBox();
             this.MaxHeatingTimeLable = new System.Windows.Forms.Label();
             this.MaxHeatTimeTextBoxUpDown = new System.Windows.Forms.NumericUpDown();
-            this.MaxHeatTimeTextBoxUpDown.Maximum = decimal.MaxValue;
             this.RecognitionTypeLabel = new System.Windows.Forms.Label();
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.CategoryTextBox = new System.Windows.Forms.TextBox();
@@ -43,9 +42,10 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(184, 212);
+            this.AddButton.Location = new System.Drawing.Point(152, 137);
+            this.AddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(198, 36);
+            this.AddButton.Size = new System.Drawing.Size(139, 23);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -54,60 +54,73 @@
             // ProductNameLable
             // 
             this.ProductNameLable.AutoSize = true;
-            this.ProductNameLable.Location = new System.Drawing.Point(39, 32);
+            this.ProductNameLable.Location = new System.Drawing.Point(26, 21);
+            this.ProductNameLable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ProductNameLable.Name = "ProductNameLable";
-            this.ProductNameLable.Size = new System.Drawing.Size(114, 20);
+            this.ProductNameLable.Size = new System.Drawing.Size(78, 13);
             this.ProductNameLable.TabIndex = 1;
             this.ProductNameLable.Text = "Product Name:";
             // 
             // ProductNameTextBox
             // 
-            this.ProductNameTextBox.Location = new System.Drawing.Point(159, 32);
+            this.ProductNameTextBox.Location = new System.Drawing.Point(152, 18);
+            this.ProductNameTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.ProductNameTextBox.MaxLength = 100;
             this.ProductNameTextBox.Name = "ProductNameTextBox";
-            this.ProductNameTextBox.Size = new System.Drawing.Size(358, 26);
+            this.ProductNameTextBox.Size = new System.Drawing.Size(139, 20);
             this.ProductNameTextBox.TabIndex = 2;
             this.ProductNameTextBox.TextChanged += new System.EventHandler(this.ProductNameTextBox_TextChanged);
             // 
             // MaxHeatingTimeLable
             // 
             this.MaxHeatingTimeLable.AutoSize = true;
-            this.MaxHeatingTimeLable.Location = new System.Drawing.Point(39, 78);
+            this.MaxHeatingTimeLable.Location = new System.Drawing.Point(26, 49);
+            this.MaxHeatingTimeLable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.MaxHeatingTimeLable.Name = "MaxHeatingTimeLable";
-            this.MaxHeatingTimeLable.Size = new System.Drawing.Size(197, 20);
+            this.MaxHeatingTimeLable.Size = new System.Drawing.Size(122, 13);
             this.MaxHeatingTimeLable.TabIndex = 3;
             this.MaxHeatingTimeLable.Text = "Max Heating Time (sec):";
             // 
             // MaxHeatTimeTextBoxUpDown
             // 
-            this.MaxHeatTimeTextBoxUpDown.Location = new System.Drawing.Point(252, 78);
+            this.MaxHeatTimeTextBoxUpDown.Location = new System.Drawing.Point(152, 47);
+            this.MaxHeatTimeTextBoxUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.MaxHeatTimeTextBoxUpDown.Maximum = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
             this.MaxHeatTimeTextBoxUpDown.Name = "MaxHeatTimeTextBoxUpDown";
-            this.MaxHeatTimeTextBoxUpDown.Size = new System.Drawing.Size(76, 26);
+            this.MaxHeatTimeTextBoxUpDown.Size = new System.Drawing.Size(139, 20);
             this.MaxHeatTimeTextBoxUpDown.TabIndex = 5;
             this.MaxHeatTimeTextBoxUpDown.ValueChanged += new System.EventHandler(this.MaxHeatTimeTextBoxUpDown_ValueChanged);
             // 
             // RecognitionTypeLabel
             // 
             this.RecognitionTypeLabel.AutoSize = true;
-            this.RecognitionTypeLabel.Location = new System.Drawing.Point(39, 120);
+            this.RecognitionTypeLabel.Location = new System.Drawing.Point(26, 81);
+            this.RecognitionTypeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.RecognitionTypeLabel.Name = "RecognitionTypeLabel";
-            this.RecognitionTypeLabel.Size = new System.Drawing.Size(136, 20);
+            this.RecognitionTypeLabel.Size = new System.Drawing.Size(94, 13);
             this.RecognitionTypeLabel.TabIndex = 1;
             this.RecognitionTypeLabel.Text = "Recognition Type:";
             // 
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(39, 164);
+            this.CategoryLabel.Location = new System.Drawing.Point(26, 110);
+            this.CategoryLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CategoryLabel.Name = "CategoryLabel";
-            this.CategoryLabel.Size = new System.Drawing.Size(77, 20);
+            this.CategoryLabel.Size = new System.Drawing.Size(52, 13);
             this.CategoryLabel.TabIndex = 1;
             this.CategoryLabel.Text = "Category:";
             // 
             // CategoryTextBox
             // 
-            this.CategoryTextBox.Location = new System.Drawing.Point(184, 164);
+            this.CategoryTextBox.Location = new System.Drawing.Point(152, 107);
+            this.CategoryTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.CategoryTextBox.Name = "CategoryTextBox";
-            this.CategoryTextBox.Size = new System.Drawing.Size(206, 26);
+            this.CategoryTextBox.Size = new System.Drawing.Size(139, 20);
             this.CategoryTextBox.TabIndex = 2;
             this.CategoryTextBox.TextChanged += new System.EventHandler(this.CategoryTextBox_TextChanged);
             // 
@@ -117,17 +130,18 @@
             this.RecognitionTypeComboBox.Items.AddRange(new object[] {
             "SpecificSoundRequired",
             "Popcorn"});
-            this.RecognitionTypeComboBox.Location = new System.Drawing.Point(184, 120);
+            this.RecognitionTypeComboBox.Location = new System.Drawing.Point(152, 78);
+            this.RecognitionTypeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.RecognitionTypeComboBox.Name = "RecognitionTypeComboBox";
-            this.RecognitionTypeComboBox.Size = new System.Drawing.Size(206, 28);
+            this.RecognitionTypeComboBox.Size = new System.Drawing.Size(139, 21);
             this.RecognitionTypeComboBox.TabIndex = 7;
             this.RecognitionTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.RecognitionTypeComboBox_SelectedIndexChanged);
             // 
             // ScannerUserInput
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 263);
+            this.ClientSize = new System.Drawing.Size(308, 171);
             this.Controls.Add(this.RecognitionTypeComboBox);
             this.Controls.Add(this.MaxHeatTimeTextBoxUpDown);
             this.Controls.Add(this.MaxHeatingTimeLable);
@@ -138,6 +152,7 @@
             this.Controls.Add(this.ProductNameLable);
             this.Controls.Add(this.AddButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "ScannerUserInput";
             this.ShowIcon = false;

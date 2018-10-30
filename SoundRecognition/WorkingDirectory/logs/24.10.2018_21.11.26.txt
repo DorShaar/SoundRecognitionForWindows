@@ -1,9 +1,0 @@
-Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
-Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
-Recognizer machine turned on
-Error!
-One of more of the next variables is invalid:
-productName:
-maxHittingTimeInSeconds:0
-recognitionType:
-category:

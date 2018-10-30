@@ -1,5 +1,0 @@
-Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemsDB.bin
-Database loaded from C:\Users\Dor Shaar\source\repos\SoundRecognition\SoundRecognition\WorkingDirectory\database\ItemToRecognizeDataMap.bin
-Recognizer machine turned on
-Generating string to encode: f2937768-5e72-4de9-b657-9f7225e093a2
-anothertest added to database

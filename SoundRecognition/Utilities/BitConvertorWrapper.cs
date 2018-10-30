@@ -36,7 +36,7 @@ namespace SoundRecognition
                 Array.Reverse(byteArr);
             }
 
-            switch(intType)
+            switch (intType)
             {
                 case IntType.Int16:
                     integer = BitConverter.ToInt16(byteArr, 0);

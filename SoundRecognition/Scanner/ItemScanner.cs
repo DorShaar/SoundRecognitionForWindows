@@ -14,9 +14,9 @@ namespace SoundRecognition
           private readonly string BARCODE_DIRECTORY_NAME = "Barcodes";
           private readonly string PNG_EXTENSION = ".png";
 
-          private readonly string mDatabaseDirectoryPath;
-          private readonly string mItemsDBPath;
-          public readonly string BarcodesDirectoryPath;
+          private string mDatabaseDirectoryPath;
+          private string mItemsDBPath;
+          public string BarcodesDirectoryPath { get; private set; }
           private Dictionary<string, IItemInfo> mItemsDictionary =
                new Dictionary<string, IItemInfo> { };
           private Logger mLogger;
@@ -25,7 +25,12 @@ namespace SoundRecognition
 
           public ItemScanner(string workingDirectoryPath)
           {
-               mLogger = new Logger(workingDirectoryPath, nameof(ItemScanner), ConsoleColor.Magenta);
+               mLogger = new Logger(nameof(ItemScanner), ConsoleColor.Magenta);
+               SetWorkingDirectoryPath(workingDirectoryPath);
+          }
+
+          public void SetWorkingDirectoryPath(string workingDirectoryPath)
+          {
                mDatabaseDirectoryPath = Path.Combine(workingDirectoryPath, DATABASE_DIRECTORY_NAME);
                mItemsDBPath = Path.Combine(mDatabaseDirectoryPath, ITEMS_DATA_BASE_NAME);
                BarcodesDirectoryPath = Path.Combine(workingDirectoryPath, BARCODE_DIRECTORY_NAME);
@@ -110,9 +115,9 @@ namespace SoundRecognition
                     {
                          item = mItemsDictionary[readResult.Text];
                     }
-                    catch(KeyNotFoundException e)
+                    catch (KeyNotFoundException e)
                     {
-                         mLogger.WriteError($"{barcodeImageName} is not in the Datebase", e);
+                         mLogger.WriteError($"{barcodeImageName} is not in the Database", e);
                     }
                }
                else

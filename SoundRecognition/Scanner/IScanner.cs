@@ -1,8 +1,8 @@
 ﻿
 namespace SoundRecognition
 {
-     interface IScanner
-     {
-          IItemInfo Scan_obsolete();
-     }
+    interface IScanner
+    {
+        IItemInfo Scan_obsolete();
+    }
 }

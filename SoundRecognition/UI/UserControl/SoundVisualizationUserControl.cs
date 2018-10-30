@@ -41,7 +41,7 @@ namespace SoundRecognition
                     this.XSpacing = 1.0 / sampleRate;
                     this.OffsetX = offsetX;
                     this.OffsetY = offsetY;
-                    if (lineColor == null) lineColor = Color.Red;
+                    if (lineColor == null) lineColor = Color.Green;//testing red
                     this.LineColor = (Color)lineColor;
                     this.LineWidth = lineWidth;
                     this.Label = label;
@@ -315,7 +315,7 @@ namespace SoundRecognition
           }
 
           /// <summary>
-          /// Force ScottPlot to redraw itself. This is helpful after changing axis limits or labels.
+          /// Force SoundVisualizationUserControl to redraw itself. This is helpful after changing axis limits or labels.
           /// </summary>
           public void Redraw()
           {

@@ -22,6 +22,9 @@ namespace SoundRecognition
           private readonly Logger mLogger;
 
           private AutoResetEvent mRecognizerFinishedEvent = new AutoResetEvent(true);
+
+          public string RecognitionStatus { get; private set; }
+
           public event EventHandler<RecognizerFinishedEventArgs> RecognizerFinished;
 
           public SpecificSoundRecognizer(string workingDirectory, int amplification, int SecondsToAnalyzeAudioFiles)
@@ -75,7 +78,8 @@ namespace SoundRecognition
 
           public void Stop(string stopReason)
           {
-               if(!mIsStopped)
+               RecognitionStatus = stopReason;
+               if (!mIsStopped)
                {
                     mShouldStop = true;
 
@@ -115,14 +119,16 @@ namespace SoundRecognition
                mSubSoundsQueue.Enqueue(new WavFile(e.FullPath));
           }
 
+          // Should not call Stop(), otherwise we need to figure out how to manage AutoResEvent flags.
           private void RunDetectionAlgorithm(Stopwatch stopwatch)
           {
                while (!mShouldStop)
                {
                     if (Recognize() == eRecognitionStatus.Recognized)
                     {
+                         RecognitionStatus = "Algorithm should stop since identified suitable sound"; 
                          mShouldStop = true;
-                         mLogger.WriteLine("Algorithm should stop since identified suitable sound");
+                         mLogger.WriteLine(RecognitionStatus);
                     }
                }
           }

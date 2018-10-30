@@ -84,18 +84,18 @@
     <Compile Include="AudioFile\WavFilesCreator.cs" />
     <Compile Include="Database\IDatabaseHolder.cs" />
     <Compile Include="Database\ItemToRecognizeDataMap.cs" />
-    <Compile Include="KNN\Infrastructure\BasicNeighbor.cs" />
+    <Compile Include="KNN\NeighborImplementation\BasicNeighbor.cs" />
     <Compile Include="KNN\Infrastructure\Interfaces\INeighbor.cs" />
-    <Compile Include="KNN\Infrastructure\RecordNeighbor.cs" />
-    <Compile Include="ThreadHelper.cs" />
+    <Compile Include="KNN\NeighborImplementation\RecordNeighbor.cs" />
+    <Compile Include="UI\ThreadHelper.cs" />
     <Compile Include="UI\SoundVisualizationDataPackage.cs" />
     <Compile Include="ItemInfo\IItemInfo.cs" />
     <Compile Include="ItemInfo\ItemInfo.cs" />
     <Compile Include="KNN\Infrastructure\Interfaces\IknnTester.cs" />
     <Compile Include="KNN\Infrastructure\NeighborsComparer.cs" />
     <Compile Include="KNN\KNNTesterImplementation\KnnTester.cs" />
-    <Compile Include="KNN\NneighborImplementation\RecordData\Interfaces\IRecordInfoDescriptor.cs" />
-    <Compile Include="KNN\NneighborImplementation\RecordData\RecordInfoDescriptor.cs" />
+    <Compile Include="KNN\Infrastructure\RecordData\Interfaces\IRecordInfoDescriptor.cs" />
+    <Compile Include="KNN\Infrastructure\RecordData\RecordInfoDescriptor.cs" />
     <Compile Include="MachineEventArgs.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="UI\ScannerUserInput.cs">
@@ -162,7 +162,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="UI\UserControl\ScottPlot.cd" />
+    <None Include="UI\UserControl\SoundRecognition.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\ScannerUserInput.resx">
@@ -183,6 +183,9 @@
     <EmbeddedResource Include="UI\UserControl\SoundVisualizationUserControl.resx">
       <DependentUpon>SoundVisualizationUserControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background_img.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.0\build\Accord.targets')" />

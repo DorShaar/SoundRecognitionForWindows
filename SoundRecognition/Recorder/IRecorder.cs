@@ -4,6 +4,6 @@ namespace SoundRecognition
 {
     interface IRecorder : IDisposable
     {
-          void Record();
+        void Record();
     }
 }
